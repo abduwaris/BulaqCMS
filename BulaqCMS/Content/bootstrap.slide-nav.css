@@ -1,0 +1,111 @@
+﻿h2, h3 {
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.slide-nav, .slide-nav-list-w {
+    width: 260px;
+    margin-right:5px;
+    /*border: 1px solid red;*/
+    border-left: 2px solid #f4f4f4;
+    border-bottom: 2px solid #f4f4f4;
+    -moz-transition: ease-in-out width 0.5s;
+    -o-transition: ease-in-out width 0.5s;
+    -webkit-transition: ease-in-out width 0.5s;
+    transition: ease-in-out width 0.5s;
+}
+
+.slide-nav-head {
+    font-size: 1.3em;
+    line-height: 40px;
+    height: 40px;
+    padding-right: 9px;
+    font-weight: bold;
+}
+
+    .slide-nav-head *[data-toggle="tooltip"]:hover {
+        color: #ff0042;
+        cursor:pointer;
+    }
+
+.slide-nav a, .slide-nav .slide-nav-item {
+    display: block;
+    line-height: 40px;
+    height: 40px;
+    text-decoration: none;
+    padding-right: 6px;
+    border-right: 3px solid transparent;
+    font-size: 1.2em;
+    color: #555;
+    cursor: pointer;
+}
+
+    .slide-nav a:hover, .slide-nav-item:hover {
+        background-color: #f4f4f4;
+        border-right-color:#ff0042;
+        color: #ff0042
+    }
+
+.slide-nav-items ul {
+    padding-right: 16px;
+    display: none;
+}
+
+.slide-nav .active {
+    background-color: #f2f2f2;
+    border-right-color: #ff265e;
+    color:#ff265e;
+}
+
+.slide-nav-item .slide-nav-icon, .slide-nav .slide-nav-head-icon {
+    line-height: inherit;
+    float: left;
+    margin-left: 5px;
+}
+
+.slide-nav-text, .slide-nav-list-icon, .slide-nav-head-icon {
+    float: right;
+    line-height: 40px;
+}
+
+.slide-nav-text {
+    margin-right: 6px;
+    opacity: 1;
+}
+
+.slide-nav-list {
+    width: 40px;
+}
+
+    .slide-nav-list .slide-nav-text,
+    .slide-nav-list-w .slide-nav-text, .slide-nav-list-w .slide-nav-icon,.slide-nav-list .slide-nav-icon {
+        display: none;
+    }
+    .slide-nav-list .slide-nav-item{
+        border-right:0;
+    }
+    .slide-nav-list .slide-nav-list-icon, .slide-nav-list .slide-nav-head-icon {
+        display: block;
+        line-height: 40px;
+        text-align: center;
+        margin: 0;
+        width: 40px;
+    }
+
+    .slide-nav-list .slide-nav-icon {
+        text-align: center;
+    }
+
+    .slide-nav-list a {
+        padding: 0 !important;
+        border-width: 0 !important;
+    }
+
+    .slide-nav-list .slide-nav-items ul,.slide-nav-list .slide-nav-item {
+        padding: 0;
+    }

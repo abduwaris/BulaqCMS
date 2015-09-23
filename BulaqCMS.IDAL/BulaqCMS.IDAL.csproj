@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{19A8D022-2434-4BA5-A24A-5C3B3E6CEF04}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BulaqCMS.IDAL</RootNamespace>
+    <AssemblyName>BulaqCMS.IDAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommentModified.cs" />
+    <Compile Include="CommentOrderByMode.cs" />
+    <Compile Include="DeleteMode.cs" />
+    <Compile Include="IDals\ICategoriesDAL.cs" />
+    <Compile Include="IDals\ICommentOptionsDAL.cs" />
+    <Compile Include="IDals\ICommentsDAL.cs" />
+    <Compile Include="IDALSession.cs" />
+    <Compile Include="IDals\ILinksDAL.cs" />
+    <Compile Include="IDals\INavGroupDAL.cs" />
+    <Compile Include="IDals\INavsDAL.cs" />
+    <Compile Include="IDals\IOptionsDAL.cs" />
+    <Compile Include="IDals\IPostInCategoriesDAL.cs" />
+    <Compile Include="IDals\IPostInTagsDAL.cs" />
+    <Compile Include="IDals\IPostOptionsDAL.cs" />
+    <Compile Include="IDals\IPostsDAL.cs" />
+    <Compile Include="IDals\ITagsDAL.cs" />
+    <Compile Include="IDals\IThemeOptionsDAL.cs" />
+    <Compile Include="IDals\IUserOptionsDAL.cs" />
+    <Compile Include="IDals\IUsersDAL.cs" />
+    <Compile Include="PostModified.cs" />
+    <Compile Include="PostsOrderByMode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BulaqCMS.Models\BulaqCMS.Models.csproj">
+      <Project>{de3137bf-d6b9-4072-bae2-6c7ced86161f}</Project>
+      <Name>BulaqCMS.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

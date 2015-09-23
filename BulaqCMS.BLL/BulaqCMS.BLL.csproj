@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C3C23ADB-6665-47B9-8C01-44ACB489DAB2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BulaqCMS.BLL</RootNamespace>
+    <AssemblyName>BulaqCMS.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseBLL.cs" />
+    <Compile Include="BLLServiceFactory.cs" />
+    <Compile Include="CategoriesService.cs" />
+    <Compile Include="CommentOptionsService.cs" />
+    <Compile Include="CommentsService.cs" />
+    <Compile Include="LinksService.cs" />
+    <Compile Include="NavsGroupService.cs" />
+    <Compile Include="NavsService.cs" />
+    <Compile Include="OptionsService.cs" />
+    <Compile Include="PostInCategoriesService.cs" />
+    <Compile Include="PostInTagsService.cs" />
+    <Compile Include="PostOptionsService.cs" />
+    <Compile Include="PostsService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceSession.cs" />
+    <Compile Include="TagsService.cs" />
+    <Compile Include="ThemeOptionsService.cs" />
+    <Compile Include="UserOptionsService.cs" />
+    <Compile Include="UsersService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BulaqCMS.Common\BulaqCMS.Common.csproj">
+      <Project>{db597b52-a8eb-4ed3-93b1-14fd30b77ea0}</Project>
+      <Name>BulaqCMS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BulaqCMS.DALService\BulaqCMS.DALService.csproj">
+      <Project>{ca732ec8-e720-4204-93c7-b53633e7dfd4}</Project>
+      <Name>BulaqCMS.DALService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BulaqCMS.IDAL\BulaqCMS.IDAL.csproj">
+      <Project>{19a8d022-2434-4ba5-a24a-5c3b3e6cef04}</Project>
+      <Name>BulaqCMS.IDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BulaqCMS.Models\BulaqCMS.Models.csproj">
+      <Project>{de3137bf-d6b9-4072-bae2-6c7ced86161f}</Project>
+      <Name>BulaqCMS.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

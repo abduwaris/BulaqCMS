@@ -1,0 +1,11 @@
+D:\vsproject\New\BlogUI\BulaqCMS.DAL.MySql\bin\Debug\BulaqCMS.DAL.MySql.dll
+D:\vsproject\New\BlogUI\BulaqCMS.DAL.MySql\bin\Debug\BulaqCMS.DAL.MySql.pdb
+D:\vsproject\New\BlogUI\BulaqCMS.DAL.MySql\bin\Debug\BulaqCMS.IDAL.dll
+D:\vsproject\New\BlogUI\BulaqCMS.DAL.MySql\bin\Debug\BulaqCMS.Models.dll
+D:\vsproject\New\BlogUI\BulaqCMS.DAL.MySql\bin\Debug\MySql.Data.dll
+D:\vsproject\New\BlogUI\BulaqCMS.DAL.MySql\bin\Debug\Newtonsoft.Json.dll
+D:\vsproject\New\BlogUI\BulaqCMS.DAL.MySql\bin\Debug\BulaqCMS.IDAL.pdb
+D:\vsproject\New\BlogUI\BulaqCMS.DAL.MySql\bin\Debug\BulaqCMS.Models.pdb
+D:\vsproject\New\BlogUI\BulaqCMS.DAL.MySql\obj\Debug\BulaqCMS.DAL.MySql.csprojResolveAssemblyReference.cache
+D:\vsproject\New\BlogUI\BulaqCMS.DAL.MySql\obj\Debug\BulaqCMS.DAL.MySql.dll
+D:\vsproject\New\BlogUI\BulaqCMS.DAL.MySql\obj\Debug\BulaqCMS.DAL.MySql.pdb

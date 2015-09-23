@@ -1,0 +1,13 @@
+D:\vsproject\New\BlogUI\BulaqCMS.BLL\bin\Debug\BulaqCMS.BLL.dll
+D:\vsproject\New\BlogUI\BulaqCMS.BLL\bin\Debug\BulaqCMS.BLL.pdb
+D:\vsproject\New\BlogUI\BulaqCMS.BLL\bin\Debug\BulaqCMS.Common.dll
+D:\vsproject\New\BlogUI\BulaqCMS.BLL\bin\Debug\BulaqCMS.DALService.dll
+D:\vsproject\New\BlogUI\BulaqCMS.BLL\bin\Debug\BulaqCMS.IDAL.dll
+D:\vsproject\New\BlogUI\BulaqCMS.BLL\bin\Debug\BulaqCMS.Models.dll
+D:\vsproject\New\BlogUI\BulaqCMS.BLL\bin\Debug\BulaqCMS.Common.pdb
+D:\vsproject\New\BlogUI\BulaqCMS.BLL\bin\Debug\BulaqCMS.DALService.pdb
+D:\vsproject\New\BlogUI\BulaqCMS.BLL\bin\Debug\BulaqCMS.IDAL.pdb
+D:\vsproject\New\BlogUI\BulaqCMS.BLL\bin\Debug\BulaqCMS.Models.pdb
+D:\vsproject\New\BlogUI\BulaqCMS.BLL\obj\Debug\BulaqCMS.BLL.csprojResolveAssemblyReference.cache
+D:\vsproject\New\BlogUI\BulaqCMS.BLL\obj\Debug\BulaqCMS.BLL.dll
+D:\vsproject\New\BlogUI\BulaqCMS.BLL\obj\Debug\BulaqCMS.BLL.pdb

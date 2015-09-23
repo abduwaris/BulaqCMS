@@ -1,0 +1,168 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="_Admin.Master.cs" Inherits="BulaqCMS.Admin.__Admin" %>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title><%:Pages.ActivePage%></title>
+    <meta name="keywords" content="Bulaq.Net" />
+    <meta name="description" content="" />
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <link href="/Content/bootstrap-rtl.css" rel="stylesheet" />
+    <link href="/Content/bootstrap-theme-rtl.css" rel="stylesheet" />
+    <link href="/Content/bootstrap.slide-nav.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-2.1.4.js" type="text/javascript"></script>
+    <script src="/Scripts/bootstrap-rtl.js" type="text/javascript"></script>
+    <script src="/Scripts/bootstrap.slide-nav.js" type="text/javascript"></script>
+    <link href="/Content/non-responsive.css" rel="Stylesheet" />
+    <link href="/Content/admin-ui.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="Head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body dir="rtl">
+    <div class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" target="_blank" href="http://www.bulaq.net">Bulaq.Net</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="#">بىكەتنى كۆرۈش</a></li>
+                <li><a href="#">يازمىلار</a></li>
+                <li><a href="#">بىخەتەر چىكىنىش</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="slide-nav" style="float: right">
+        <h2 class="slide-nav-head"><span class="glyphicon glyphicon-th slide-nav-head-icon" data-toggle="tooltip" data-placement="left" title="تىزىملىك"></span></h2>
+        <ul>
+            <li>
+
+                <a <%:new HtmlString(Pages.ActivePage=="main"?"class=\"active page\"":"href=Main.aspx") %>>
+                    <span class="glyphicon glyphicon-home slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="باش بەت"></span>
+                    <span class="slide-nav-text">باشقۇرۇش سۇپىسى</span>
+                </a>
+            </li>
+            <li>
+                <a <%:new HtmlString(Pages.ActivePage=="home"?"class=\"active page\"":"href=Main.aspx") %>><span class="glyphicon glyphicon-home slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="باش بېتىمنى كۆرۈش"></span><span class="slide-nav-text">باش بېتىمنى كۆرۈش</span></a>
+            </li>
+            <li class="slide-nav-items">
+                <strong class="slide-nav-item <%:Pages.ActivePage.StartsWith("post")?"active":"" %>"><span class="glyphicon glyphicon-book slide-nav-list-icon"></span><span class="slide-nav-text">يازمىلار</span><span class="glyphicon glyphicon-menu-left slide-nav-icon" data-toggle="tooltip" data-placement="left" title="يازمىلار"></span></strong>
+                <ul <%:new HtmlString(Pages.ActivePage.StartsWith("post")?"style=\"display: block\"":"") %>>
+                    <li>
+                        <a <%:new HtmlString(Pages.ActivePage=="post-posts"?"class=\"active\"":"href=Posts.aspx") %>><span class="glyphicon glyphicon-plus-sign slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="بارلىق يازمىلار"></span><span class="slide-nav-text">بارلىق يازمىلار</span></a>
+                    </li>
+                    <li>
+                        <a <%:new HtmlString(Pages.ActivePage=="post-editor"?"class=\"active\"":"href=Editor.aspx") %>><span class="glyphicon glyphicon-plus-sign slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="يېڭى يازما"></span><span class="slide-nav-text">يېڭى يازما</span></a>
+                    </li>
+                    <li>
+                        <a <%:new HtmlString(Pages.ActivePage=="post-commons"?"class=\"active\"":"href=Commons.aspx") %>><span class="glyphicon glyphicon-random slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="باھالار"></span><span class="slide-nav-text">باھالار</span></a>
+                    </li>
+                    <li>
+                        <a <%:new HtmlString(Pages.ActivePage=="post-cats"?"class=\"active\"":"href=Categories.aspx") %>><span class="glyphicon glyphicon-duplicate slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="سەھىپىلەر"></span><span class="slide-nav-text">سەھىپىلەر</span></a>
+                    </li>
+                    <li>
+                        <a <%:new HtmlString(Pages.ActivePage=="post-tags"?"class=\"active\"":"href=Tags.aspx") %>><span class="glyphicon glyphicon-duplicate slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="خەتكۈچلەر"></span><span class="slide-nav-text">خەتكۈچلەر</span></a>
+                    </li>
+                </ul>
+            </li>
+            <li class="slide-nav-items">
+                <strong class="slide-nav-item <%:Pages.ActivePage.StartsWith("link")?"active":"" %>"><span class="glyphicon glyphicon-fire slide-nav-list-icon"></span><span class="slide-nav-text">ئۇلانما </span><span class="glyphicon glyphicon-menu-left slide-nav-icon" data-toggle="tooltip" data-placement="left" title="ئۇلانما"></span></strong>
+                <ul <%:new HtmlString(Pages.ActivePage.StartsWith("link")?"style=\"display: block\"":"") %>>
+                    <li>
+                        <a <%:new HtmlString(Pages.ActivePage=="link-links"?"class=\"active\"":"href=Links.aspx") %>><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="ئۇلانمىلار"></span><span class="slide-nav-text">ئۇلانمىلار</span></a>
+                    </li>
+                    <li>
+                        <a <%:new HtmlString(Pages.ActivePage=="link-editor"?"class=\"active\"":"href=link_editor.aspx") %>><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="ئۇلانما قوشۇش"></span><span class="slide-nav-text">ئۇلانما قوشۇش</span></a>
+                    </li>
+                    <li>
+                        <a <%:new HtmlString(Pages.ActivePage=="link-cats"?"class=\"active\"":"href=link_categories.aspx") %>><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="ئۇلانما سەھىپىللىرى"></span><span class="slide-nav-text">ئۇلانما سەھىپىللىرى</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="تىزىملىكىم"></span><span class="slide-nav-text">تىزىملىكىم</span></a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="slide-nav-items">
+                <strong class="slide-nav-item"><span class="glyphicon glyphicon-fire slide-nav-list-icon"></span><span class="slide-nav-text">ئۇسلۇب باشقۇرۇش </span><span class="glyphicon glyphicon-menu-left slide-nav-icon" data-toggle="tooltip" data-placement="left" title="ئۇسلۇب باشقۇرۇش"></span></strong>
+                <ul>
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="يازما ئۇسلۇبى"></span><span class="slide-nav-text">يازما ئۇسلۇبى</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="باش بەت ئۇسلۇبى"></span><span class="slide-nav-text">باش بەت ئۇسلۇبى</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="بىكەت باش بەت ئۇسلۇبى"></span><span class="slide-nav-text">بىكەت باش بەت ئۇسلۇبى</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="تىزىملىكىم"></span><span class="slide-nav-text">تىزىملىكىم</span></a>
+                    </li>
+                </ul>
+            </li>
+            <li class="slide-nav-items">
+                <strong class="slide-nav-item <%:this.Pages.ActivePage.StartsWith("user")?"active":"" %>"><span class="glyphicon glyphicon-user slide-nav-list-icon"></span><span class="slide-nav-text">ئىشلەتكۈچىلەر</span><span class="glyphicon glyphicon-menu-left slide-nav-icon data-toggle" data-toggle="tooltip" data-placement="left" title="ئىشلەتكۈچىلەر"></span></strong>
+                <ul <%:new HtmlString(Pages.ActivePage.StartsWith("user")?"style=\"display: block\"":"") %>>
+                    <li>
+                        <a <%:new HtmlString(Pages.ActivePage=="user-users"?"class=\"active\"":"href=Users.aspx") %>><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="بارلىق ئىشلەتكۈچىلەر"></span><span class="slide-nav-text">بارلىق ئىشلەتكۈچىلەر</span></a>
+                    </li>
+                    <li>
+                        <a <%:new HtmlString(Pages.ActivePage=="user-add"?"class=\"active\"":"href=UserEdit.aspx") %>><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="يېڭى ئىشلەتكۈچى قوشۇش"></span><span class="slide-nav-text">يېڭى ئىشلەتكۈچى قوشۇش</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="قۇشۇمچە ماتىرىيالىم"></span><span class="slide-nav-text">قۇشۇمچە ماتىرىيالىم</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="پارولنى قايتا بىكىتىش"></span><span class="slide-nav-text">پارولنى قايتا بىكىتىش</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="ھەقىقى ئىسىم دەلىللەش"></span><span class="slide-nav-text">ھەقىقى ئىسىم دەلىللەش</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="ئىزلىرىم"></span><span class="slide-nav-text">ئىزلىرىم</span></a>
+                    </li>
+                </ul>
+            </li>
+            <li class="slide-nav-items">
+                <strong class="slide-nav-item"><span class="glyphicon glyphicon-file slide-nav-list-icon"></span><span class="slide-nav-text">ئۇقتۇرۇش مەركىزى</span><span class="glyphicon glyphicon-menu-left slide-nav-icon" data-toggle="tooltip" data-placement="left" title="ئۇقتۇرۇش مەركىزى"></span></strong>
+                <ul>
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="قىسقا ئۇچۇر"></span><span class="slide-nav-text">قىسقا ئۇچۇر</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="ئىنكاس ئۇقتۇرىشى"></span><span class="slide-nav-text">ئىنكاس ئۇقتۇرىشى</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="ھەۋەسكار ئۇقتۇرىشى"></span><span class="slide-nav-text">ھەۋەسكار ئۇقتۇرىشى</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="سىستىما ئۇقتۇرىشى"></span><span class="slide-nav-text">سىستىما ئۇقتۇرىشى</span></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="باشقا ئۇقتۇرۇشلار"></span><span class="slide-nav-text">باشقا ئۇقتۇرۇشلار</span></a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="container-fluid container-main">
+        <div class="container-fluid">
+            <asp:ContentPlaceHolder ID="Container" runat="server">
+                <%-- 网站整体 --%>
+            </asp:ContentPlaceHolder>
+        </div>
+    </div>
+
+    <%--<asp:ContentPlaceHolder ID="Footer" runat="server">
+        
+    </asp:ContentPlaceHolder>--%>
+
+    <div class="clearfix">
+        <div class="right">بۇلاقتا قۇرغىنىڭىزغا رەھمەت</div>
+    </div>
+
+    <asp:ContentPlaceHolder ID="BeforeBody" runat="server">
+        <%-- 最下面,填充 Js, 或其他组件 --%>
+    </asp:ContentPlaceHolder>
+</body>
+</html>

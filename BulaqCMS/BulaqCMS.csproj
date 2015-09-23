@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1A214A2E-63AF-49E8-9741-460790698498}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BulaqCMS</RootNamespace>
+    <AssemblyName>BulaqCMS</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>C:\Users\abduwaris\Documents\Visual Studio 2013\Projects\CSS\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Admin\Categories.aspx" />
+    <Content Include="Admin\Comments.aspx" />
+    <Content Include="Admin\EditCategories.aspx" />
+    <Content Include="Admin\Editor.aspx" />
+    <Content Include="Admin\Links.aspx" />
+    <Content Include="Admin\link_categories.aspx" />
+    <Content Include="Admin\link_editor.aspx" />
+    <Content Include="Admin\Login.aspx" />
+    <Content Include="Admin\Main.aspx" />
+    <Content Include="Admin\Options.aspx" />
+    <Content Include="Admin\Posts.aspx" />
+    <Content Include="Admin\Scripts\Editor\dialogs\emotion\emotion.css" />
+    <Content Include="Admin\Scripts\Editor\dialogs\emotion\emotion.js" />
+    <Content Include="Admin\Scripts\Editor\dialogs\emotion\images\0.gif" />
+    <Content Include="Admin\Scripts\Editor\dialogs\emotion\images\bface.gif" />
+    <Content Include="Admin\Scripts\Editor\dialogs\emotion\images\cface.gif" />
+    <Content Include="Admin\Scripts\Editor\dialogs\emotion\images\fface.gif" />
+    <Content Include="Admin\Scripts\Editor\dialogs\emotion\images\jxface2.gif" />
+    <Content Include="Admin\Scripts\Editor\dialogs\emotion\images\neweditor-tab-bg.png" />
+    <Content Include="Admin\Scripts\Editor\dialogs\emotion\images\tface.gif" />
+    <Content Include="Admin\Scripts\Editor\dialogs\emotion\images\wface.gif" />
+    <Content Include="Admin\Scripts\Editor\dialogs\emotion\images\yface.gif" />
+    <Content Include="Admin\Scripts\Editor\dialogs\formula\formula.css" />
+    <Content Include="Admin\Scripts\Editor\dialogs\formula\formula.html" />
+    <Content Include="Admin\Scripts\Editor\dialogs\formula\formula.js" />
+    <Content Include="Admin\Scripts\Editor\dialogs\formula\images\formula.png" />
+    <Content Include="Admin\Scripts\Editor\dialogs\image\image.css" />
+    <Content Include="Admin\Scripts\Editor\dialogs\image\image.js" />
+    <Content Include="Admin\Scripts\Editor\dialogs\image\images\close.png" />
+    <Content Include="Admin\Scripts\Editor\dialogs\image\images\upload1.png" />
+    <Content Include="Admin\Scripts\Editor\dialogs\image\images\upload2.png" />
+    <Content Include="Admin\Scripts\Editor\dialogs\link\link.js" />
+    <Content Include="Admin\Scripts\Editor\dialogs\map\map.html" />
+    <Content Include="Admin\Scripts\Editor\dialogs\map\map.js" />
+    <Content Include="Admin\Scripts\Editor\dialogs\video\images\center_focus.jpg" />
+    <Content Include="Admin\Scripts\Editor\dialogs\video\images\left_focus.jpg" />
+    <Content Include="Admin\Scripts\Editor\dialogs\video\images\none_focus.jpg" />
+    <Content Include="Admin\Scripts\Editor\dialogs\video\images\right_focus.jpg" />
+    <Content Include="Admin\Scripts\Editor\dialogs\video\video.css" />
+    <Content Include="Admin\Scripts\Editor\dialogs\video\video.js" />
+    <Content Include="Admin\Scripts\Editor\index.html" />
+    <Content Include="Admin\Scripts\Editor\lang\en\en.js" />
+    <Content Include="Admin\Scripts\Editor\lang\en\images\addimage.png" />
+    <Content Include="Admin\Scripts\Editor\lang\en\images\alldeletebtnhoverskin.png" />
+    <Content Include="Admin\Scripts\Editor\lang\en\images\alldeletebtnupskin.png" />
+    <Content Include="Admin\Scripts\Editor\lang\en\images\background.png" />
+    <Content Include="Admin\Scripts\Editor\lang\en\images\button.png" />
+    <Content Include="Admin\Scripts\Editor\lang\en\images\copy.png" />
+    <Content Include="Admin\Scripts\Editor\lang\en\images\deletedisable.png" />
+    <Content Include="Admin\Scripts\Editor\lang\en\images\deleteenable.png" />
+    <Content Include="Admin\Scripts\Editor\lang\en\images\imglabel.png" />
+    <Content Include="Admin\Scripts\Editor\lang\en\images\listbackground.png" />
+    <Content Include="Admin\Scripts\Editor\lang\en\images\localimage.png" />
+    <Content Include="Admin\Scripts\Editor\lang\en\images\music.png" />
+    <Content Include="Admin\Scripts\Editor\lang\en\images\rotateleftdisable.png" />
+    <Content Include="Admin\Scripts\Editor\lang\en\images\rotateleftenable.png" />
+    <Content Include="Admin\Scripts\Editor\lang\en\images\rotaterightdisable.png" />
+    <Content Include="Admin\Scripts\Editor\lang\en\images\rotaterightenable.png" />
+    <Content Include="Admin\Scripts\Editor\lang\en\images\upload.png" />
+    <Content Include="Admin\Scripts\Editor\lang\zh-cn\images\copy.png" />
+    <Content Include="Admin\Scripts\Editor\lang\zh-cn\images\imglabel.png" />
+    <Content Include="Admin\Scripts\Editor\lang\zh-cn\images\localimage.png" />
+    <Content Include="Admin\Scripts\Editor\lang\zh-cn\images\music.png" />
+    <Content Include="Admin\Scripts\Editor\lang\zh-cn\images\upload.png" />
+    <Content Include="Admin\Scripts\Editor\lang\zh-cn\zh-cn.js" />
+    <Content Include="Admin\Content\Editor\themes\default\css\umeditor.css" />
+    <Content Include="Admin\Content\Editor\themes\default\css\umeditor.min.css" />
+    <Content Include="Admin\Content\Editor\themes\default\images\caret.png" />
+    <Content Include="Admin\Content\Editor\themes\default\images\close.png" />
+    <Content Include="Admin\Content\Editor\themes\default\images\icons.gif" />
+    <Content Include="Admin\Content\Editor\themes\default\images\icons.png" />
+    <Content Include="Admin\Content\Editor\themes\default\images\ok.gif" />
+    <Content Include="Admin\Content\Editor\themes\default\images\pop-bg.png" />
+    <Content Include="Admin\Content\Editor\themes\default\images\spacer.gif" />
+    <Content Include="Admin\Content\Editor\themes\default\images\videologo.gif" />
+    <Content Include="Admin\Scripts\Editor\umeditor.config.js" />
+    <Content Include="Admin\Scripts\Editor\umeditor.js" />
+    <Content Include="Admin\Scripts\Editor\umeditor.min.js" />
+    <Content Include="Admin\Tags.aspx" />
+    <Content Include="Admin\UserEdit.aspx" />
+    <Content Include="Admin\Users.aspx" />
+    <Content Include="Content\admin-ui.css" />
+    <Content Include="Content\bootstrap-rtl.css" />
+    <Content Include="Content\bootstrap-rtl.min.css" />
+    <Content Include="Content\bootstrap-theme-rtl.css" />
+    <Content Include="Content\bootstrap-theme-rtl.min.css" />
+    <Content Include="Content\bootstrap.slide-nav.css" />
+    <Content Include="Content\non-responsive.css" />
+    <Content Include="Content\swf\uploadify.swf" />
+    <Content Include="Content\uploadify.css" />
+    <Content Include="Fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap-rtl.js" />
+    <Content Include="Scripts\bootstrap-rtl.min.js" />
+    <Content Include="Scripts\bootstrap.slide-nav.js" />
+    <Content Include="Admin\ImageCode.ashx" />
+    <Content Include="Admin\_Admin.Master" />
+    <Content Include="Fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="App_Data\ConnectionString.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Admin\PostsImageUp.ashx" />
+    <Content Include="Admin\Scripts\Editor\umeditor.min.js.map">
+      <DependentUpon>umeditor.min.js</DependentUpon>
+    </Content>
+    <Content Include="Admin\PostTags.ashx" />
+    <None Include="App_Data\mysql.json" />
+    <Content Include="App_Data\AppSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Properties\PublishProfiles\BulaqCMS.pubxml" />
+    <Content Include="Scripts\bootstrap-rtl.min.js.map">
+      <DependentUpon>bootstrap-rtl.min.js</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\jquery.uploadify.js" />
+    <Content Include="Scripts\jquery.uploadify.min.js" />
+    <Content Include="Scripts\jquery.uploadify.my.js" />
+    <Content Include="Scripts\jquery.uploadify.source.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\Categories.aspx.cs">
+      <DependentUpon>Categories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Categories.aspx.designer.cs">
+      <DependentUpon>Categories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Code\AdminBasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Code\HttpMethod.cs" />
+    <Compile Include="Admin\Code\ImageUploader.cs" />
+    <Compile Include="Admin\Code\ResponseDataType.cs" />
+    <Compile Include="Admin\Code\UserOfflineException.cs" />
+    <Compile Include="Admin\Comments.aspx.cs">
+      <DependentUpon>Comments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Comments.aspx.designer.cs">
+      <DependentUpon>Comments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\EditCategories.aspx.cs">
+      <DependentUpon>EditCategories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EditCategories.aspx.designer.cs">
+      <DependentUpon>EditCategories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Editor.aspx.cs">
+      <DependentUpon>Editor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Editor.aspx.designer.cs">
+      <DependentUpon>Editor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ImageCode.ashx.cs">
+      <DependentUpon>ImageCode.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Links.aspx.cs">
+      <DependentUpon>Links.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Links.aspx.designer.cs">
+      <DependentUpon>Links.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\link_categories.aspx.cs">
+      <DependentUpon>link_categories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\link_categories.aspx.designer.cs">
+      <DependentUpon>link_categories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\link_editor.aspx.cs">
+      <DependentUpon>link_editor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\link_editor.aspx.designer.cs">
+      <DependentUpon>link_editor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Main.aspx.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Main.aspx.designer.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Options.aspx.cs">
+      <DependentUpon>Options.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Options.aspx.designer.cs">
+      <DependentUpon>Options.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Posts.aspx.cs">
+      <DependentUpon>Posts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Posts.aspx.designer.cs">
+      <DependentUpon>Posts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\PostsImageUp.ashx.cs">
+      <DependentUpon>PostsImageUp.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\PostTags.ashx.cs">
+      <DependentUpon>PostTags.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Serialize\ResponseResult.cs" />
+    <Compile Include="Admin\Tags.aspx.cs">
+      <DependentUpon>Tags.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Tags.aspx.designer.cs">
+      <DependentUpon>Tags.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\UserEdit.aspx.cs">
+      <DependentUpon>UserEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\UserEdit.aspx.designer.cs">
+      <DependentUpon>UserEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Users.aspx.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Users.aspx.designer.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\_Admin.Master.cs">
+      <DependentUpon>_Admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\_Admin.Master.designer.cs">
+      <DependentUpon>_Admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <Content Include="Scripts\jquery.uploadify.min.js.map" />
+    <Content Include="Scripts\jquery-2.1.4.min.js.map">
+      <DependentUpon>jquery-2.1.4.min.js</DependentUpon>
+    </Content>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BulaqCMS.BLL\BulaqCMS.BLL.csproj">
+      <Project>{c3c23adb-6665-47b9-8c01-44acb489dab2}</Project>
+      <Name>BulaqCMS.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BulaqCMS.Common\BulaqCMS.Common.csproj">
+      <Project>{db597b52-a8eb-4ed3-93b1-14fd30b77ea0}</Project>
+      <Name>BulaqCMS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BulaqCMS.DAL.MySql\BulaqCMS.DAL.MySql.csproj">
+      <Project>{28d86f9a-7320-4254-923b-1f377f3eb546}</Project>
+      <Name>BulaqCMS.DAL.MySql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BulaqCMS.Models\BulaqCMS.Models.csproj">
+      <Project>{de3137bf-d6b9-4072-bae2-6c7ced86161f}</Project>
+      <Name>BulaqCMS.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\PostsUpload\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>43636</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:43636/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
