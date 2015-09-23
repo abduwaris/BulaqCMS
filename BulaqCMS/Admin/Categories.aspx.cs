@@ -66,19 +66,20 @@ namespace BulaqCMS.Admin
             if (nodeCount > 0) prev += "┫ ";
             foreach (var chi in childs)
             {
-                htm += "<tr><td class=\"tools-p\">" +
+                htm += "<tr class=\"tools-p\"><td>" +
                     prev + chi.Title +
                     "<div class=\"tools\">" +
                     "<div class=\"btn-group\">" +
                     "<a href=\"?mode=edit&cid=" + chi.ID +
                     "\" class=\"btn btn-primary btn-xs\">تەھرىرلەش</a>" +
-                    "<input type=\"button\" name=\"name\" value=\"تىز تەھرىرلەش\" class=\"btn btn-info btn-xs\" onclick=\"quickEdit(this," + chi.ID + ");\"/>" +
+                    //"<input type=\"button\" name=\"name\" value=\"تىز تەھرىرلەش\" class=\"btn btn-info btn-xs\" onclick=\"quickEdit(this," + chi.ID + ");\"/>" +
                     "<input type=\"button\" name=\"name\" value=\"ئۆچۈرۈش\" class=\"btn btn-danger btn-xs\" onclick=\"_delete(" + chi.ID + ");\"/>" +
                     "<input type=\"button\" name=\"name\" value=\"كۆرۈش\" class=\"btn btn-default btn-xs\" />" +
                     "</div></div></td>" +
                     "<td>" + chi.Name +
                     "</td><td>" + chi.Des +
-                    "</td><td><a href=\"#\" class=\"badge\">" + chi.PostsCount +
+                    "</td><td><a href=\"Posts.aspx?cat=" + chi.ID +
+                    "\" class=\"badge\">" + chi.PostsCount +
                     "</a></td>" +
                     "</tr>";
                 if (Cats.Count(p => p.ParentID == chi.ID) > 0) Lists(Cats.Where(p => p.ParentID == chi.ID).ToList(), nodeCount + 1);
@@ -165,5 +166,7 @@ namespace BulaqCMS.Admin
             }
             base.ProcessRequest(context);
         }
+
+
     }
 }

@@ -61,14 +61,14 @@ namespace BulaqCMS.Admin
         protected string view;
         protected void Page_Load(object sender, EventArgs e)
         {
-            _queryString = new Dictionary<string, object>();
+            QueryString = new Dictionary<string, object>();
             //获取浏览对象
             string[] views = { "all", "aprove", "delflag" };
             view = string.IsNullOrEmpty(Request.QueryString["view"]) ? "all" : Request.QueryString["view"].Trim().ToLower();
             if (!views.Contains(view)) view = "all";
             bool? isAprove = view == "aprove" ? (bool?)false : null;
             bool? isDelfalg = view == "delflag" ? (bool?)true : null;
-            _queryString.Add("view", view);
+            QueryString.Add("view", view);
             //专辑
             int? catId = null;
             if (!string.IsNullOrEmpty(Request.QueryString["cat"]))
@@ -78,7 +78,7 @@ namespace BulaqCMS.Admin
                     if (catIdb >= 0)
                     {
                         catId = catIdb;
-                        _queryString["cat"] = catIdb;
+                        QueryString["cat"] = catIdb;
                     }
             }
 
@@ -91,7 +91,7 @@ namespace BulaqCMS.Admin
                     if (tagIdb >= 0)
                     {
                         tagId = tagIdb;
-                        _queryString["tag"] = tagIdb;
+                        QueryString["tag"] = tagIdb;
                     }
             }
 
@@ -104,7 +104,7 @@ namespace BulaqCMS.Admin
                     if (authorIdb >= 0)
                     {
                         authorId = authorIdb;
-                        _queryString["author"] = authorIdb;
+                        QueryString["author"] = authorIdb;
                     }
             }
 
@@ -126,24 +126,6 @@ namespace BulaqCMS.Admin
             {
                 return "post-posts";
             }
-        }
-
-        /// <summary>
-        /// url 参数
-        /// </summary>
-        private Dictionary<string, object> _queryString;
-
-        /// <summary>
-        /// 创建Url 参数
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public HtmlString CreateQueryString(string key, object value)
-        {
-            Dictionary<string, object> dic = new Dictionary<string, object>(_queryString);
-            dic[key] = value;
-            return new HtmlString(string.Join("&", dic.Select(p => p.Key + "=" + p.Value)));
         }
     }
 }

@@ -2,3 +2,4 @@ D:\vsproject\New\BlogUI\BulaqCMS.Common\bin\Debug\BulaqCMS.Common.dll
 D:\vsproject\New\BlogUI\BulaqCMS.Common\bin\Debug\BulaqCMS.Common.pdb
 D:\vsproject\New\BlogUI\BulaqCMS.Common\obj\Debug\BulaqCMS.Common.dll
 D:\vsproject\New\BlogUI\BulaqCMS.Common\obj\Debug\BulaqCMS.Common.pdb
+D:\vsproject\New\BlogUI\BulaqCMS.Common\obj\Debug\BulaqCMS.Common.csprojResolveAssemblyReference.cache

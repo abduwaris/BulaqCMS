@@ -52,7 +52,19 @@ namespace BulaqCMS.IDAL
         /// <returns></returns>
         List<CommentsModel> CommentsInPost(params int[] postIds);
 
+        /// <summary>
+        /// 根据ID获取评论
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        CommentsModel GetCommentById(int id);
 
+        /// <summary>
+        /// 根据父评论ID获取评论
+        /// </summary>
+        /// <param name="parentId"></param>
+        /// <returns></returns>
+        List<CommentsModel> GetCommentsByParentId(int parentId);
         /// <summary>
         /// 插入
         /// </summary>
@@ -69,11 +81,26 @@ namespace BulaqCMS.IDAL
         int Update(CommentsModel com, CommentModified mode);
 
         /// <summary>
+        /// 移动评论父
+        /// </summary>
+        /// <param name="newParentId"></param>
+        /// <param name="oldParentId"></param>
+        /// <returns></returns>
+        int MoveParent(int newParentId, int oldParentId);
+
+        /// <summary>
         /// 删除评论
         /// </summary>
         /// <param name="id">删除id</param>
         /// <param name="isPostId">根据什么删除,是不是post</param>
         /// <returns></returns>
         int Delete(int id, bool isPostId = false);
+
+        /// <summary>
+        /// 根据评论父删除
+        /// </summary>
+        /// <param name="parentId"></param>
+        /// <returns></returns>
+        int DeleteByParentId(int parentId);
     }
 }

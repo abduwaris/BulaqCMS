@@ -87,7 +87,7 @@ namespace BulaqCMS.BLL
             if (errors.Count <= 0)
             {
                 if (string.IsNullOrEmpty(cat.Name)) cat.Name = "g" + Guid.NewGuid().ToString().Replace("-", "");
-                if (CurrentDAL.Insert(cat) <= 0) errors.Add("on_update_error");
+                if (CurrentDAL.Update(cat) <= 0) errors.Add("on_update_error");
                 else return true;
             }
             return false;

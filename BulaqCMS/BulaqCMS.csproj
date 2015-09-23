@@ -201,9 +201,13 @@
     <Compile Include="Admin\Code\AdminBasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Admin\Code\AdminBasePagePartial.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Admin\Code\HttpMethod.cs" />
     <Compile Include="Admin\Code\ImageUploader.cs" />
     <Compile Include="Admin\Code\ResponseDataType.cs" />
+    <Compile Include="Admin\Code\ResponseResult.cs" />
     <Compile Include="Admin\Code\UserOfflineException.cs" />
     <Compile Include="Admin\Comments.aspx.cs">
       <DependentUpon>Comments.aspx</DependentUpon>
@@ -284,7 +288,6 @@
     <Compile Include="Admin\PostTags.ashx.cs">
       <DependentUpon>PostTags.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Serialize\ResponseResult.cs" />
     <Compile Include="Admin\Tags.aspx.cs">
       <DependentUpon>Tags.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -82,7 +82,7 @@ namespace BulaqCMS.DAL.MySql
         /// <returns></returns>
         public int Update(TagsModel tag)
         {
-            string sql = string.Format("UPDATE `{0}tags` SET `{0}tags`.`title`,`{0}tags`.`name`,`{0}tags`.`des` WHERE `{0}tags`.`tag_id` = {1}", Helper.Prefix, tag.ID);
+            string sql = string.Format("UPDATE `{0}tags` SET `{0}tags`.`title`=@title,`{0}tags`.`name`=@name,`{0}tags`.`des`=@des WHERE `{0}tags`.`tag_id` = {1}", Helper.Prefix, tag.ID);
             MySqlParameter[] param = { 
                                      new MySqlParameter("@title",tag.Title),
                                      new MySqlParameter("@name",tag.Name),

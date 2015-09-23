@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using HtmlAgilityPack;
 namespace BulaqCMS.Admin
 {
-    public class AdminBasePage : Page, IRequiresSessionState
+    public partial class AdminBasePage : Page, IRequiresSessionState
     {
         #region Const String
 
@@ -118,24 +118,65 @@ namespace BulaqCMS.Admin
             }
         }
 
-        protected override void OnInit(EventArgs e)
+        /// <summary>
+        /// 客户端返回码
+        /// </summary>
+        protected ResponseResult Result { get; set; }
+
+
+        protected override void Construct()
         {
-            base.OnInit(e);
-            string esca = Uri.EscapeDataString(Request.Url.ToString());
-            if (!IsOnline) Response.Redirect(string.Format("Login.aspx{0}", Request.Url.LocalPath.ToLower() != "/admin/login.aspx" ? ("?url=" + esca) : ""));
-            this.Languege = "ug-cn";
+            Result = new ResponseResult();
+            base.Construct();
         }
 
         public override void ProcessRequest(HttpContext context)
         {
-            //判断用户返回的是不是
-            if (Method == HttpMethod.HttpPost)
+            //设置头部
+            this.__context = context;
+            //设置语言
+            this.Languege = "ug-cn";
+
+            //判断用户是否登陆
+            if (!IsOnline)
             {
-                if (ResponseType == ResponseDataType.Json && !IsOnline)
-                    context.Response.Write(JsonConvert.SerializeObject(new { result = "no", errors = new string[] { "offline" } }));
-                return;
+                //判断是否Json格式
+                if (ResponseType == ResponseDataType.Json)
+                {
+                    if (ResponseType == ResponseDataType.Json && !IsOnline)
+                        context.Response.Write(JsonConvert.SerializeObject(Result.SetError("offline"), new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }));
+                }
+                //判断是否是 XML
+                else
+                {
+                    //浏览器访问
+                    string esca = Uri.EscapeDataString(context.Request.Url.ToString());
+                    context.Response.Redirect(string.Format("Login.aspx{0}", context.Request.Url.LocalPath.ToLower() != "/admin/login.aspx" ? ("?url=" + esca) : ""));
+                }
+                Response.End();
             }
-            base.ProcessRequest(context);
+            else
+            {
+                //判断用户返回的是不是
+                base.ProcessRequest(context);
+                ////如果是 Json 并且是 Post
+                //if (ResponseType == ResponseDataType.Json && Method == HttpMethod.HttpPost)
+                //{
+                //    context.Response.Write(JsonConvert.SerializeObject(Result, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }));
+                //}
+            }
+
+        }
+
+        protected override void OnInit(EventArgs e)
+        {
+            //如果是 Json 并且是 Post
+            if (ResponseType == ResponseDataType.Json && Method == HttpMethod.HttpPost)
+            {
+                Response.Write(JsonConvert.SerializeObject(Result, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }));
+                Response.End();
+            }
+            base.OnInit(e);
         }
 
         /// UBB Editor
@@ -159,9 +200,6 @@ namespace BulaqCMS.Admin
         /// [u]<words>[/u]  下划线
         /// 
 
-        protected HtmlString Html(object obj)
-        {
-            return new HtmlString(obj.ToString());
-        }
+
     }
 }

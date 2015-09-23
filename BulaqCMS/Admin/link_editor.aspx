@@ -2,35 +2,35 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Container" runat="server">
-    <h3 class="bulaq-header">يېڭى ئۇلانما قوشۇش</h3>
+    <h3 class="bulaq-header"><%:isEdit?"ئۇلانما تەھرىرلەش":"يېڭى ئۇلانما قوشۇش" %></h3>
             <div class="row">
                 <div class="col-sm-9">
                     <form>
                         <div class="form-group">
                             <label>نامى</label>
-                            <input type="text" class="form-control input-sm" placeholder="نامى">
+                            <input type="text" class="form-control input-sm" placeholder="نامى" value="<%:isEdit?UpdateLinks.Title:"" %>" >
                             <i class="help-block">تور بېتىڭىزدە مۇشۇ نامدا كۆرسىتىلىدىغان بۇلۇپ يەككىلىككە ئىگە ئەمەس. ھەرقانداق ھەرىپ بەلگىلەرنى قوللايدۇ.</i>
                         </div>
-                        <div class="form-group">
+                        <%--<div class="form-group">
                             <label>ئۇلانما باشقا نامى</label>
                             <input type="text" class="form-control input-sm text-ltr" placeholder="ئۇلانما باشقا نامى">
                             <i class="help-block">
                                 «ئۇلانما باشقا نامى» بولسا ئۇلىنىش ئىچىدە ئىشلىتىلىدىغان نام بۇلۇپ، يەككلىلىككە ئىگە.
                             </i>
-                        </div>
+                        </div>--%>
                         <div class="form-group">
                             <label>ئۇلانما ئادرىسى</label>
-                            <input type="text" name="name" value=" " class="form-control input-sm text-ltr" placeholder="ئۇلانما ئادرىسى" />
+                            <input type="text" name="name" value="<%:isEdit?UpdateLinks.Url:"" %>" class="form-control input-sm text-ltr" placeholder="ئۇلانما ئادرىسى" />
                             <i class="help-block">
                                 سىرتقى ئۇلىنىش قىلىش ئۈچۈن <code class="text-ltr">http://</code> ياكى <code class="text-ltr">https://</code> بىلەن باشلاپ يېزىڭ. مەسىلەن <code class="text-ltr">http://www.bulaq.net</code> دىگەندەك. مۇشۇنداق بولغاندا ئىچكى ئۇلىنىشلار بىلەن تۇقۇنۇشۇپ قالمايدۇ. قالغانلىرى تور كۆرگۈچنىڭ قانداق ئانالىز قىلىشىغا باغلىق.
                             </i>
                         </div>
                         <div class="form-group">
                             <label>چۈشەندۈرۈش</label>
-                            <textarea class="form-control" rows="5" placeholder="ئۇلانما ئۈچۈن چۈشەندۈرۈش بىرىڭ"></textarea>
+                            <textarea class="form-control" rows="5" placeholder="ئۇلانما ئۈچۈن چۈشەندۈرۈش بىرىڭ"><%:isEdit?UpdateLinks.Des:"" %></textarea>
                             <i class="help-block">بۇ ئۇلانما ئۈچۈن بىر ئىككى ئېغىز چۈشەندۈرۈش بىرىڭ.</i>
                         </div>
-                        <button type="submit" class="btn btn-primary">قوشۇش</button>
+                        <button type="submit" class="btn btn-primary"><%:isEdit?"ئۆزگەرتىشلەرنى ساقلاش":"ئۇلانما قوشۇش" %></button>
                     </form>
                 </div>
                 <div class="col-sm-3">

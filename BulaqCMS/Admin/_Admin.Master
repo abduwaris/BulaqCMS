@@ -55,7 +55,7 @@
                         <a <%:new HtmlString(Pages.ActivePage=="post-editor"?"class=\"active\"":"href=Editor.aspx") %>><span class="glyphicon glyphicon-plus-sign slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="يېڭى يازما"></span><span class="slide-nav-text">يېڭى يازما</span></a>
                     </li>
                     <li>
-                        <a <%:new HtmlString(Pages.ActivePage=="post-commons"?"class=\"active\"":"href=Commons.aspx") %>><span class="glyphicon glyphicon-random slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="باھالار"></span><span class="slide-nav-text">باھالار</span></a>
+                        <a <%:new HtmlString(Pages.ActivePage=="post-comments"?"class=\"active\"":"href=Comments.aspx") %>><span class="glyphicon glyphicon-random slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="باھالار"></span><span class="slide-nav-text">باھالار</span></a>
                     </li>
                     <li>
                         <a <%:new HtmlString(Pages.ActivePage=="post-cats"?"class=\"active\"":"href=Categories.aspx") %>><span class="glyphicon glyphicon-duplicate slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="سەھىپىلەر"></span><span class="slide-nav-text">سەھىپىلەر</span></a>
@@ -164,5 +164,76 @@
     <asp:ContentPlaceHolder ID="BeforeBody" runat="server">
         <%-- 最下面,填充 Js, 或其他组件 --%>
     </asp:ContentPlaceHolder>
+
+    <%-- 提示框组 --%>
+    <script>
+        ///操作提示框
+        ///     @msg: 提示内容
+        ///     @title: 提示标题 默认: سەمىمىي ئەسكەرتىش
+        ///     @okFunction:  点击确定按钮时发生的事件
+        ///     @okCancel:  点击取消按钮时发生的事件
+        function Confirm(msg, title, okFunction, cancelFunction) {
+            if (!msg) msg = "";
+            if (!title) title = "ئەسكەرتىش";
+            var htm = '<div class="modal fade"><div class="modal-dialog"><div class="modal-content">'
+            + '<div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
+            + '<h4 class="modal-title">'
+            + title
+            + '</h4></div><div class="modal-body"><p>'
+            + msg
+            + '</p></div><div class="modal-footer">'
+            + '<button type="button" class="btn btn-default" data-dismiss="modal">قالدۇرۇش</button>'
+            + '<button type="button" class="btn btn-primary confirm-btn">ھەئە</button>'
+            + '</div></div></div></div>';
+            var md = $(htm);
+            if (okFunction && typeof (okFunction) == 'function') {
+                md.find('button.confirm-btn').click(function () {
+                    okFunction();
+                    md.modal('hide').on('hidden.bs.modal', function () {
+                        //删除对话框
+                        //alert('remove modal');
+                        md.remove();
+                    });
+                });
+            }
+            $(document.body).append(md);
+            md.modal({ backdrop: 'static', keyboard: true });
+        }
+
+        ///简单提示框
+        ///  @msg: 提示内容
+        ///  @mode: 方式 默认:success
+        ///         success
+        ///         danger
+        ///         info
+        ///  @hideEvent  提示框关闭之后发生
+        function alertTip(msg, state, hideEvent) {
+            if (!msg) msg = '';
+            if (typeof hideEvent != 'function' && typeof state == 'function') {
+                hideEvent = state;
+                state = 'success';
+            }
+            if (state !== 'success' && state !== 'danger' && state !== 'info') state = 'success';
+            var htm = '<div class="modal fade"><div class="modal-dialog" style="text-align: center;">'
+            + '<div class="modal-content" style="display: inline-block;">'
+            + '<div class="modal-body alert alert-'
+            + state
+            + '" style="margin-bottom: 0"><p style="margin: 0">'
+            + msg
+            + '</p></div></div></div></div>';
+            var tip = $(htm);
+            $(document.body).append(tip);
+            tip.modal().on('shown.bs.modal', function () {
+                setTimeout(function () {
+                    tip.modal('hide');
+                }, 700);
+            }).on('hidden.bs.modal', function () {
+                if (hideEvent && typeof (hideEvent) == 'function')
+                    hideEvent();
+                //删除
+                tip.remove();
+            });
+        }
+    </script>
 </body>
 </html>

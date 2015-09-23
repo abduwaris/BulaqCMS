@@ -1,4 +1,5 @@
-﻿using BulaqCMS.Models;
+﻿using BulaqCMS.BLL;
+using BulaqCMS.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,11 +37,6 @@ namespace BulaqCMS.Admin
         /// </summary>
         protected string view;
 
-        /// <summary>
-        /// 路由参数
-        /// </summary>
-        protected Dictionary<string, object> _queries;
-
         protected int allCount = 0;
         protected int aprovedCount = 0;
         protected int delFlagCount = 0;
@@ -48,38 +44,37 @@ namespace BulaqCMS.Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            _queries = new Dictionary<string, object>();
+            QueryString = new Dictionary<string, object>();
             /// postID
             /// pageIndex
             /// email
             /// uname,
             /// userId
             /// ip
-            string[] views = { "all", "notaproved", "aproved", "delflag", "recycle" };
+            string[] views = { "all", "notaproved", "aproved", "delflag" };
             view = string.IsNullOrEmpty(Request.QueryString["view"]) ? "all" : Request.QueryString["view"].Trim().ToLower();
             if (!views.Contains(view)) view = "all";
             bool? approved = view == "notaproved" ? (bool?)false : view == "aproved" ? (bool?)true : null;
             bool? delfalg = view == "delflag" ? (bool?)true : null;
-            bool? recycle = view == "recycle" ? (bool?)true : null;
 
-            _queries["view"] = view;
+            QueryString["view"] = view;
             //筛选
             //Email
             string email = string.IsNullOrEmpty(Request.QueryString["email"]) ? null : Request.QueryString["email"].Trim();
-            if (email != null) _queries["email"] = email;
+            if (email != null) QueryString["email"] = email;
             //文章
             int? postId = null;
             int postIdd = 0;
             if (!string.IsNullOrEmpty(Request.QueryString["postid"]) && int.TryParse(Request.QueryString["postid"].Trim(), out postIdd)) postId = postIdd;
-            if (postId != null) _queries["postid"] = postId;
+            if (postId != null) QueryString["postid"] = postId;
             //IP
             string ip = string.IsNullOrEmpty(Request.QueryString["ip"]) ? null : Request.QueryString["ip"].Trim();
-            if (ip != null) _queries["ip"] = ip;
+            if (ip != null) QueryString["ip"] = ip;
             //作者
             int? authorId = null;
             int authorIdd = 0;
             if (!string.IsNullOrEmpty(Request.QueryString["author"]) && int.TryParse(Request.QueryString["author"].Trim(), out authorIdd)) authorId = authorIdd;
-            if (authorId != null) _queries["author"] = authorId;
+            if (authorId != null) QueryString["author"] = authorId;
             //页码
             pageIndex = string.IsNullOrEmpty(Request.QueryString["page"]) ? 1 : int.TryParse(Request.QueryString["page"].Trim(), out pageIndex) ? pageIndex : 1;
 
@@ -93,19 +88,62 @@ namespace BulaqCMS.Admin
 
         }
 
+
         public override string ActivePage
         {
             get
             {
-                return "post-commons";
+                return "post-comments";
             }
         }
 
-        protected HtmlString CreateQueryString(string key, object value)
+
+        protected override void OnInit(EventArgs e)
         {
-            Dictionary<string, object> dic = new Dictionary<string, object>(_queries);
-            dic[key.Trim()] = value;
-            return new HtmlString(string.Join("&", dic.Select(p => p.Key + "=" + p.Value)));
+            if (Method == HttpMethod.HttpPost)
+            {
+                var frm = Request.Form;
+                string[] modes = { "delete", "delflag" };
+                string mode = stringNull(frm["Mode"]) ? null : frm["Mode"].Trim().ToLower();
+                if (modes.Contains(mode))
+                {
+                    string error = null;
+                    bool isOk = false;
+                    if (mode == "delete")
+                    {
+                        //删除
+                        int comId = 0;
+                        if (stringNull(frm["CommentID"]) || !int.TryParse(frm["CommentID"].Trim(), out comId) || Service.CommentsService.GetCommentById(comId) == null) error = "delete_comment_null";
+                        else
+                        {
+                            if (Service.CommentsService.Delete(comId, true, true) > 0) isOk = true;
+                            else error = "on_delete_error";
+                        }
+                    }
+                    else if (mode == "delflag")
+                    {
+                        int comId = 0;
+                        bool state = false;
+                        if (stringNull(frm["CommentID"]) || !int.TryParse(frm["CommentID"].Trim(), out comId)) error = "del_comment_null";
+                        else if (stringNull(frm["State"]) || !bool.TryParse(frm["State"].Trim(), out state)) error = "del_state_null";
+                        else
+                        {
+                            var com = Service.CommentsService.GetCommentById(comId);
+                            if (com == null) error = "del_comment_null";
+                            else
+                            {
+                                com.DelFlag = state;
+                                if (Service.CommentsService.UpdateDelFlag(com)) isOk = true;
+                                else error = "on_delflag_error";
+                            }
+                        }
+                    }
+
+                    Result.SetResult(isOk).SetError(error);
+                }
+            }
+
+            base.OnInit(e);
         }
     }
 }

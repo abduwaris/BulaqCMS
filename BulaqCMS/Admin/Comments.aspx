@@ -7,8 +7,8 @@
             <a class="btn btn-<%:view=="all"?"primary":"default" %> btn-sm" href="?view=all">ھەممە (<%:allCount %>)</a>
             <a class="btn btn-<%:view=="notaproved"?"primary":"default" %> btn-sm" href="?view=notaproved">تەستىق كۈتىۋاتقان (<%:allCount-aprovedCount %>)</a>
             <a class="btn btn-<%:view=="aproved"?"primary":"default" %> btn-sm" href="?view=aproved">تەستىقلانغان (<%:aprovedCount %>)</a>
-            <a class="btn btn-<%:view=="delflag"?"primary":"default" %> btn-sm" href="?view=delflag">ئەخلەت خەت قېلىنغان (<%:delFlagCount %>)</a>
-            <a class="btn btn-<%:view=="recycle"?"primary":"default" %> btn-sm" href="?view=recycle">ئەخلەت (<%:recycleCount %>)</a>
+            <a class="btn btn-<%:view=="delflag"?"primary":"default" %> btn-sm" href="?view=delflag">ئەخلەت (<%:delFlagCount %>)</a>
+
         </div>
         <div class="form-inline f-left">
             <input type="text" name="name" value="" class="form-control input-sm" placeholder="تىمىسىدىن ئىزدەپ باقامسىز؟" />
@@ -42,26 +42,19 @@
                             <div class="btn-group">
                                 <%if (!com.Approved)
                                   { %>
-                                <input type="button" class="btn btn-default btn-xs" name="name" value="تەستىقلاش" />
+                                <input type="button" class="btn btn-success btn-xs" name="name" value="تەستىقلاش" />
                                 <% }%>
                                 <input type="button" class="btn btn-info btn-xs" name="name" value="جاۋاب" />
                                 <input type="button" class="btn btn-primary btn-xs" name="name" value="تەھرىرلەش" />
                                 <%if (com.DelFlag)
                                   { %>
-                                <input type="button" class="btn btn-success btn-xs" name="name" value="ئەخلەت بەلگىسىنى ئېلىۋېتىش" />
+                                <input type="button" class="btn btn-success btn-xs" onclick="_delFlag(<%:com.ID%>,true)" name="name" value="ئەسلىگە قايتۇرۇش" />
+                                <input type="button" class="btn btn-danger btn-xs" onclick="_deleteComment(<%:com.ID%>)" name="name" value="ئۆچۈرۈش" />
                                 <%}
                                   else
                                   { %>
-                                <input type="button" class="btn btn-warning btn-xs" name="name" value="ئەخلەتلەش" />
-                                <%}
-                                  if (com.IsInRecycle)
-                                  {%>
-                                <input type="button" class="btn btn-success btn-xs" name="name" value="ئەسلىگە قايتۇرۇش" />
-                                <%}
-                                  else
-                                  { %>
-                                <input type="button" class="btn btn-danger btn-xs" name="name" value="ئۆچۈرۈش" />
-                                <%} %>
+                                <input type="button" class="btn btn-warning btn-xs" onclick="_delFlag(<%:com.ID%>,true)" name="name" value="ئەخلەتلەش" />
+                                <%}%>
                             </div>
                         </div>
                     </td>
@@ -89,4 +82,40 @@
     </ul>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="BeforeBody" runat="server">
+    <script>
+        var msgs = {
+            'on_delete_error':'ئىنكاسنى ئۆچۈرۈشتە خاتالىق كۆرۈلدى!',
+            'offline':'سىز توردا ئەمەس، كىرگەندىن كىيىن مەشۇلات قىلالايسىز!',
+            'delete_comment_null':'ئۆچۈرمەكچى بولغان ئىنكاس مەۋجۇت ئەمەس!',
+            'delete_success':'ئىنكاس ئۆچۈرۈلدى!',
+            'del_comment_null':'ئەخلەتلىمەكچى بولغان ئىنكاس مەۋجۇت ئەمەس!',
+            'del_state_null':'ئەخلەتلىمەكچى بولغان ئىنكاستا خاتالىق بار!',
+            'on_delflag_error':'ئىنكاسنى ئەخلەتلەشتە خاتالىق كۆرۈلدى!',
+            '':'',
+        };
+        function _delFlag(comId,state) {
+            if(!comId||typeof comId!='number') return;
+            state = !!state;
+            Confirm('بۇ ئىنكاسنى ئەخلەتلەمسىز؟','ئىنكاس',function () {
+                $.post('comments.aspx',{'CommentID':comId,'Mode':'delflag','State':state},function (d) {
+                    if(d['result']=='ok') alertTip(msgs.delete_success,function(){window.location.reload()});
+                    else{
+                        alertTip(msgs[d['error']],'danger',d['error']=='offline'?function(){window.location.href='Login.aspx?url='+encodeURIComponent(location.href)}:null);
+                    }
+                },'json');
+            });
+        }
+
+        function _deleteComment(comId) {
+            if(!comId||typeof comId!='number') return;
+            Confirm('بۇ ئىنكاسنى مەڭگۈلۈك ئۆچۈرەمسىز؟','ئىنكاس',function () {
+                $.post('comments.aspx',{'CommentID':comId,'Mode':'delete'},function (d) {
+                    if(d['result']=='ok') alertTip(msgs.delete_success,function(){window.location.reload()});
+                    else{
+                        alertTip(msgs[d['error']],'danger',d['error']=='offline'?function(){window.location.href='Login.aspx?url='+encodeURIComponent(location.href)}:null);
+                    }
+                },'json');
+            });
+        }
+    </script>
 </asp:Content>

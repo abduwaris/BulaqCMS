@@ -15,6 +15,23 @@ namespace BulaqCMS.BLL
             this.CurrentDAL = DAL.PostInTagsDAL;
         }
 
+        public List<PostInTagsModel> GetList()
+        {
+            return CurrentDAL.GetList();
+        }
+
+        public List<PostInTagsModel> GetListByPost(int postId)
+        {
+            return CurrentDAL.GetList(postId, ModifiedMode.Post);
+        }
+
+        public List<PostInTagsModel> GetListByTag(int tagId)
+        {
+            return CurrentDAL.GetList(tagId, ModifiedMode.TagOrCategoriy);
+        }
+
+
+
         /// <summary>
         /// 根据关系删除
         /// </summary>
@@ -48,6 +65,17 @@ namespace BulaqCMS.BLL
                 //var tags2 = DAL.TagsDAL.GetList()
             }
             return false;
+        }
+
+        /// <summary>
+        /// 向文章批量插入标签
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <param name="tags"></param>
+        /// <returns></returns>
+        public bool Add(IList<PostInTagsModel> tags)
+        {
+            return CurrentDAL.Insert(tags.ToArray()) > 0;
         }
     }
 }

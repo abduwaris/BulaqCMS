@@ -48,6 +48,16 @@ namespace BulaqCMS.BLL
         }
 
         /// <summary>
+        /// 掺入标签
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <returns></returns>
+        public bool Add(TagsModel tag)
+        {
+            return CurrentDAL.Insert(tag) > 0;
+        }
+
+        /// <summary>
         /// 新增一个标签
         /// </summary>
         /// <param name="tag"></param>
@@ -109,6 +119,16 @@ namespace BulaqCMS.BLL
 
         }
 
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <returns></returns>
+        public bool Update(TagsModel tag)
+        {
+            return CurrentDAL.Update(tag) > 0;
+        }
+
         public bool Update(TagsModel tag, List<string> errors)
         {
             //判断是否用title
@@ -123,6 +143,14 @@ namespace BulaqCMS.BLL
                 errors.Add("on_update_error");
             }
             return false;
+        }
+
+        public bool Delete(int tagId)
+        {
+            //删除文章关系
+            Service.PostInTagsService.Delete(tagId, ModifiedMode.TagOrCategoriy);
+            //删除自己
+            return CurrentDAL.Delete(tagId) > 0;
         }
     }
 }

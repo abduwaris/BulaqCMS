@@ -71,7 +71,7 @@
                     <tr>
                         <th>سەھىپە نامى</th>
                         <th width="180">سەھىپە باشقا نامى</th>
-                        <th>سەھىپە چۈشەندۈرۈلۈشى</th>
+                        <th width="300">سەھىپە چۈشەندۈرۈلۈشى</th>
                         <th width="80">يازما سانى</th>
                     </tr>
                 </thead>
@@ -97,13 +97,14 @@
                     <%} %>--%>
                 </tbody>
             </table>
-            <p class="help-block" >
+            <p class="help-block ">
                 سەھىپە ئۆچۈرۈلسىمۇ، ئۇنىڭدىكى يازمىلار ئۆچۈرۈلمەيدۇ. بەلكى ئۆچۈرۈلگەن سەھىپىدىكى يازمىلار سەھىپە ئايرىلمىغان سەھىپىسىگە يۆتكىۋېتىلىدۇ.
             </p>
         </div>
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="BeforeBody" runat="server">
+
     <script>
         var msgs = {
             'categoryid_null': 'ئۆزگەرتمەكچى بولغان سەھىپە مەۋجۇت ئەمەس!',
@@ -116,15 +117,17 @@
             'on_update_error': 'سەھىپىنى ئۆزگەرتىشتە خاتالىق كۆرۈلدى!',
             'on_delete_error': 'سەھىپىنى ئۆچۈرۈشتە خاتالىق كۆرۈلدى!'
         };
+
         $('#submit').click(function () {
             var frm = $(this).parent('form');
+            var mod = frm.find('input[name=Mode]').val() == 'new' ? "سەھىپىنى مۇۋاپىقىيەتلىك قوشتىڭىز!" : "سەھىپى ئۆزگەرتىش مۇۋاپىقىيەتلىك بولدى!";
             $.ajax({
                 type: 'post',
                 dataType: 'json',
                 url: 'Categories.aspx',
                 data: frm.serialize(),
                 success: function (d) {
-                    if (d.result == 'ok') window.location.reload();
+                    if (d.result == 'ok') alertTip(mod, 'success', function () { window.location.href = location.pathname });
                     else if (d.result == 'no') {
                         var errors = d.errors;
                         errors.forEach(function (val, index) {
@@ -143,7 +146,7 @@
                         })
                     }
                 }, error: function () {
-                    alert("Server Error Or Server Filed!");
+                    alertTip('Server Error Or Server Filed!', 'danger');
                 }
             });
         });
@@ -160,26 +163,25 @@
 
         ///删除
         function _delete(cid) {
-            if (!cid || cid <= 0) return;
-            if (confirm('بۇ سەھىپىنى راستىنلا ئۆچۈرەمسىز؟')) {
+            Confirm('بۇ سەھىپىنى راستىنلا ئۆچۈرەمسىز؟', 'سەمىمى ئەسكەرتىش', function (d) {
                 $.ajax({
                     type: 'post',
                     dataType: 'json',
                     url: '',
                     data: { 'CatID': cid, "Mode": 'delete' },
                     success: function (d, s) {
-                        if (d.result == 'ok') window.location.reload();
+                        if (d.result == 'ok') alertTip('سەھىپىنى مۇۋاپىقىيەتلىك ئۆچۈردىڭىز!', function () { window.location.reload(); });
                         else {
                             d.errors.forEach(function (val, index) {
-                                alert(msgs[val]);
+                                alertTip(msgs[val], 'danger');
                             });
                         }
                     },
                     error: function (s) {
-                        alert('Server Error Or Server Filed!');
+                        alertTip('Server Error Or Server Filed!', 'danger');
                     }
                 });
-            }
+            });
         }
     </script>
 </asp:Content>

@@ -74,6 +74,51 @@ namespace BulaqCMS.DAL.MySql
         }
 
         /// <summary>
+        /// 根据ID获取评论
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public CommentsModel GetCommentById(int id)
+        {
+            string sql = string.Format("select * from `{0}comments` where `{0}comments`.`com_id`={1};", Helper.Prefix, id);
+            return ToModelList(Helper.Select(sql)).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// 根据父评论ID获取评论
+        /// </summary>
+        /// <param name="parentId"></param>
+        /// <returns></returns>
+        public List<CommentsModel> GetCommentsByParentId(int parentId)
+        {
+            string sql = string.Format("select * from `{0}comments` where `{0}comments`.`parent_id`={1};", Helper.Prefix, parentId);
+            return ToModelList(Helper.Select(sql));
+        }
+
+        /// <summary>
+        /// 移动评论父
+        /// </summary>
+        /// <param name="newParentId"></param>
+        /// <param name="oldParentId"></param>
+        /// <returns></returns>
+        public int MoveParent(int newParentId, int oldParentId)
+        {
+            string sql = string.Format("update `{0}comments` set `{0}comments`.`parent_id`={1} where `{0}comments`.`parent_id`={2};", Helper.Prefix, newParentId, oldParentId);
+            return Helper.Query(sql);
+        }
+
+        /// <summary>
+        /// 根据评论父删除
+        /// </summary>
+        /// <param name="parentId"></param>
+        /// <returns></returns>
+        public int DeleteByParentId(int parentId)
+        {
+            string sql = string.Format("Delete from `{0}comments` where `{0}comments`.`parent_id`={1};", Helper.Prefix, parentId);
+            return Helper.Query(sql);
+        }
+
+        /// <summary>
         /// 分页查询
         /// </summary>
         /// <param name="pageIndex">页码</param>

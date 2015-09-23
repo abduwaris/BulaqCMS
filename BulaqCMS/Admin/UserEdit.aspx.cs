@@ -42,10 +42,16 @@ namespace BulaqCMS.Admin
         /// <param name="context"></param>
         public override void ProcessRequest(HttpContext context)
         {
+
+            base.ProcessRequest(context);
+        }
+
+        protected override void OnInit(EventArgs e)
+        {
             //判断是不是 Post 过来
             if (Method == HttpMethod.HttpPost && IsOnline)
             {
-                var req = context.Request;
+                var req = Request;
                 //获取mode
                 string mode = req.Form["mode"];
                 if (mode == "edit" || mode == "new")
@@ -94,22 +100,11 @@ namespace BulaqCMS.Admin
                         }
                     }
                     //写入 Json
-                    if (ResponseType == ResponseDataType.Json) context.Response.Write(JsonConvert.SerializeObject(isOk ? (object)new { result = "ok" } : new { result = "no", errors = errors }));
-                    ///XML
-                    else if (ResponseType == ResponseDataType.Xml)
-                    {
-                        XmlSerializer seria = new XmlSerializer(typeof(ResponseResult));
-                        using (TextWriter st = new StringWriter())
-                        {
-                            ResponseResult res = new ResponseResult() { Result = isOk ? "ok" : "no", Errors = errors };
-                            seria.Serialize(st, res);
-                            context.Response.Write(st.ToString());
-                        }
-                    }
+                    Response.Write(JsonConvert.SerializeObject(isOk ? (object)new { result = "ok" } : new { result = "no", errors = errors }));
                     return;
                 }
             }
-            base.ProcessRequest(context);
+            base.OnInit(e);
         }
     }
 }

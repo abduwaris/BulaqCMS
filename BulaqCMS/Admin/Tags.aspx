@@ -50,17 +50,17 @@
                 <tbody class="items-list">
                     <%foreach (var tag in allTags)
                       {%>
-                    <tr>
+                    <tr class="tools-p">
                         <td><%:tag.Title %></td>
                         <td>
                             <span class="text-ltr"><%:tag.Name %></span>
                         </td>
-                        <td class="tools-p"><%:tag.Des %>
+                        <td><%:tag.Des %>
                             <div class="tools">
                                 <div class="btn-group">
                                     <a href="?mode=edit&tagid=<%:tag.ID %>" class="btn btn-primary btn-xs">تەھرىرلەش</a>
-                                    <input type="button" name="name" value="ئۆچۈرۈش" class="btn btn-danger btn-xs" />
-                                    <input type="button" name="name" value="كۆرۈش" class="btn btn-default btn-xs" />
+                                    <input type="button" name="name" value="ئۆچۈرۈش" onclick="_deleteTag(<%:tag.ID%>);" class="btn btn-danger btn-xs" />
+                                    <a href="/Tag/<%:tag.Name %>" class="btn btn-default btn-xs" >كۆرۈش</a>
                                 </div>
                             </div>
                         </td>
@@ -77,48 +77,21 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="BeforeBody" runat="server">
-    <style>
-        .bulaq-alert {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: 80px;
-            text-align: center;
-            text-align: center;
-            display: none;
-        }
-
-        .bulaq-alert-text {
-            display: inline-block;
-            margin: 10px auto 0;
-            width: auto;
-            height: 60px;
-            line-height: 60px;
-            padding: 0 40px;
-            white-space: nowrap;
-            -ms-text-overflow: ellipsis;
-            -o-text-overflow: ellipsis;
-            text-overflow: ellipsis;
-            background: white;
-            border: 1px solid #d0d0d0;
-        }
-    </style>
-    <%-- <div class="bulaq-alert">
-        <div class="bulaq-alert-text text-danger">خەتكۈچ باشقا نامىدا خاتالىق بار.</div>
-    </div>--%>
-
     <script>
 
         var msgs = {
-            'name_format': 'خەتكۈچ باشقا نامىدا خاتالىق بار.',
+            'name_format': 'خەتكۈچ باشقا نامىدا خاتالىق بار!',
             'title_null': 'خەتكۈچ نامى بوش قالمىسۇن!',
-            'tag_null': 'ئۆزگەرتمەكچى بولغان خەتكۈچ مەۋجۇت ئەمەس',
-            'tagid_null': 'ئۆزگەرتمەكچى بولغان خەتكۈچ مەۋجۇت ئەمەس',
+            'tag_null': 'خەتكۈچ مەۋجۇت ئەمەس!',
             'on_update_error': 'خەتكۈچنى ئۆزگەرتىشتە خاتالىق كۆرۈلدى!',
+            'on_add_error': 'خەتكۈچنى قوشۇشتا خاتالىق كۆرۈلدى! قايتا سىناپ بېقىڭ!',
             'has_title': 'بۇ نامدىكى خەتكۈچ مەۋجۇت! باشقا نام بىرىڭ.',
-            'has_name': 'خەتكۈچ باشقا نامى مەۋجۇت! باشقا نام بىرىڭ.'
+            'has_name': 'خەتكۈچ باشقا نامى مەۋجۇت! باشقا نام بىرىڭ.',
+            'offline': 'سىز تېخى كىرمىدىڭىز! كىرگەندىن كىيىن مەشغۇلات قىلالايسىز!',
+            'on_delete_error': 'خەتكۈچنى ئۆچۈرۈشتە خاتالىق بار!'
         };
 
+        //提交
         $('#frm-tags-edit button[name=submit]').click(function () {
             var frm = $('#frm-tags-edit');
             var tit = frm.find('input[name=Title]');
@@ -131,29 +104,26 @@
             }
             //添加 
             $.post('tags.aspx', frm.serialize(), function (d) {
-                if (d.result == 'ok') window.location.href = location.pathname;
+                if (d.result == 'ok') alertTip('خەتكۈچ ساقلاندى!', function () { window.location.href = location.pathname });
                 else {
-                    var ers = d.errors;
-                    ers.forEach(function (er) {
-                        bulaqAlert(msgs[er], 'error');
-                    });
+                    alertTip(msgs[d['error']], 'danger', function () { window.location.href = d['error'] == 'offline' ? 'Login.aspx?url=' + encodeURIComponent(location.href) : location.pathname });
                 }
             }, 'json');
         });
 
-        ///state error|success
-        function bulaqAlert(msg, state) {
-            var htm = '<div class="bulaq-alert"><div class="bulaq-alert-text '
-                + (state == 'success' ? 'text-success' : 'text-danger')
-            + '">'
-            + msg
-            + '</div></div>';
-            var bart = $(htm);
-            $(document.body).append(bart);
-            bart.fadeIn(300);
-            setTimeout(function () {
-                bart.fadeOut(300, function () { bart.remove(); });
-            }, 2000);
+
+        //删除
+        function _deleteTag(tagId) {
+            if (!tagId || typeof tagId != 'number') return;
+            Confirm('بۇ خەتكۈچنى راستىنلا مەڭگۈلۈك ئۆچۈرەمسىز؟', 'خەتكۈچ ئۆچۈرۈش ئەسكەرتمىسى', function () {
+                $.post('Tags.aspx', { 'Mode': 'delete', 'TagID': tagId }, function (d) {
+                    if (d.result == 'ok') alertTip('خەتكۈچ ئۆچۈرۈلدى!', 'success', function () { window.location.href = location.pathname; });
+                    else {
+                        alertTip(msgs[d['error']], 'danger', d['error'] == 'offline' ? function () { window.location.href = 'Login.aspx?url=' + encodeURIComponent(location.href); } : null);
+                    }
+                }, 'json');
+            });
         }
+
     </script>
 </asp:Content>

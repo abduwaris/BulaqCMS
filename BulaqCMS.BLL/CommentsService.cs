@@ -86,15 +86,41 @@ namespace BulaqCMS.BLL
         /// </summary>
         /// <param name="commentId">评论 ID</param>
         /// <param name="withOptions">是否删除评论</param>
+        /// <param name="removeChildComments">是否删除子评论</param>
         /// <returns></returns>
-        public int Delete(int commentId, bool withOptions)
+        public int Delete(int commentId, bool withOptions, bool removeChildComments)
         {
             if (withOptions)
             {
                 Service.CommentOptionsService.Delete(commentId, true);
             }
+            //获取它的所有字评论
+            var cComs = CurrentDAL.GetCommentsByParentId(commentId);
+            //删除
+            if (cComs.Count > 0 && removeChildComments) DeleteByParent(commentId);
+            else if (cComs.Count > 0)
+            {
+                //移动
+                var pCom = CurrentDAL.GetCommentById(commentId);
+                CurrentDAL.MoveParent(pCom.ParentID, commentId);
+            }
             return CurrentDAL.Delete(commentId, false);
         }
+
+
+
+        public bool DeleteByParent(int parentId)
+        {
+            //获取它的所有字评论
+            var cComs = CurrentDAL.GetCommentsByParentId(parentId);
+            foreach (var com in cComs)
+            {
+                var ccComs = CurrentDAL.GetCommentsByParentId(com.ID);
+                if (ccComs.Count > 0) DeleteByParent(com.ID);
+            }
+            return true;
+        }
+
 
         /// <summary>
         /// 根据文章删除评论
@@ -109,6 +135,35 @@ namespace BulaqCMS.BLL
             Service.CommentOptionsService.Delete(true, coms.Select(p => p.ID).ToArray());
             //删除评论
             return CurrentDAL.Delete(postId, true);
+        }
+
+        /// <summary>
+        /// 根据ID获取评论
+        /// </summary>
+        /// <param name="commentId"></param>
+        /// <returns></returns>
+        public CommentsModel GetCommentById(int commentId)
+        {
+            return CurrentDAL.GetCommentById(commentId);
+        }
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="comment"></param>
+        /// <returns></returns>
+        public bool Update(CommentsModel comment)
+        {
+            return CurrentDAL.Update(comment, CommentModified.All) > 0;
+        }
+        /// <summary>
+        /// 删除表示
+        /// </summary>
+        /// <param name="comment"></param>
+        /// <returns></returns>
+        public bool UpdateDelFlag(CommentsModel comment)
+        {
+            return CurrentDAL.Update(comment, CommentModified.Del) > 0;
         }
     }
 }
