@@ -23,13 +23,24 @@ namespace BulaqCMS.DAL.MySql
         }
 
         /// <summary>
+        /// 根据 name 获取菜单
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public NavGroupModel GetGroupByName(string name)
+        {
+            string sql = string.Format("SELECT * FROM `{0}nav_group` where LOWER(`{0}nav_group`.`name`)=LOWER(@n);", Helper.Prefix);
+            return ToModelList(Helper.Select(sql, new MySqlParameter("@n", name))).FirstOrDefault();
+        }
+
+        /// <summary>
         /// 新增
         /// </summary>
         /// <param name="group"></param>
         /// <returns></returns>
         public int Insert(NavGroupModel group)
         {
-            string sql = string.Format("INSERT `{0}nav_group`(`{0}nav_group`.`name`, `{0}nav_group`.`title`, `{0}nav_group`.`des`) VALUES(@name,@title,@des);");
+            string sql = string.Format("INSERT `{0}nav_group`(`{0}nav_group`.`name`, `{0}nav_group`.`title`, `{0}nav_group`.`des`) VALUES(@name,@title,@des);", Helper.Prefix);
             MySqlParameter[] param = { 
                                      new MySqlParameter("@name",group.Name),
                                      new MySqlParameter("@title",group.Title),
@@ -70,7 +81,7 @@ namespace BulaqCMS.DAL.MySql
             NavGroupModel g = new NavGroupModel();
             if (row["group_id"] != null) g.ID = Convert.ToInt32(row["group_id"]);
             if (row["name"] != null) g.Name = row["name"].ToString();
-            if (row["title"] != null) g.Title = row["name"].ToString();
+            if (row["title"] != null) g.Title = row["title"].ToString();
             if (row["des"] != null) g.Des = row["des"].ToString();
             return g;
         }

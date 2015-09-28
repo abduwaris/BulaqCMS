@@ -6504,7 +6504,7 @@ button.list-group-item {
 
 button.list-group-item {
     width: 100%;
-    text-align: left;
+    text-align: right;
 }
 
 .list-group-item.disabled,

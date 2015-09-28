@@ -23,6 +23,17 @@ namespace BulaqCMS.DAL.MySql
         }
 
         /// <summary>
+        /// 根据菜单分类获取菜单
+        /// </summary>
+        /// <param name="groupId"></param>
+        /// <returns></returns>
+        public List<NavsModel> NavsByGroupId(int groupId)
+        {
+            string sql = string.Format("SELECT * FROM `{0}navs` where `{0}navs`.`group_id`={1};", Helper.Prefix, groupId);
+            return ToModelList(Helper.Select(sql));
+        }
+
+        /// <summary>
         /// 根据分组获取
         /// </summary>
         /// <param name="groupId"></param>
@@ -77,6 +88,30 @@ namespace BulaqCMS.DAL.MySql
                                      new MySqlParameter("@from",nav.From)
                                      };
             return Helper.Query(sql, param);
+        }
+
+        /// <summary>
+        /// 新的顺序
+        /// </summary>
+        /// <param name="navId"></param>
+        /// <param name="newIndex"></param>
+        /// <returns></returns>
+        public int NewIndex(int navId, short newIndex)
+        {
+            string sql = string.Format("update `{0}navs` set `{0}navs`.`index`={1} where `{0}navs`.`nav_id`={2};", Helper.Prefix, newIndex, navId);
+            return Helper.Query(sql);
+        }
+
+        /// <summary>
+        /// 修改父级
+        /// </summary>
+        /// <param name="navId"></param>
+        /// <param name="newParentId"></param>
+        /// <returns></returns>
+        public int NewParent(int navId, int newParentId)
+        {
+            string sql = string.Format("update `{0}navs` set `{0}navs`.`parent_id`={1} where `{0}navs`.`nav_id`={2};", Helper.Prefix, newParentId, navId);
+            return Helper.Query(sql);
         }
 
         /// <summary>

@@ -19,5 +19,44 @@ namespace BulaqCMS.BLL
         {
             return CurrentDAL.GetList();
         }
+
+        /// <summary>
+        /// 新增
+        /// </summary>
+        /// <param name="link"></param>
+        /// <returns></returns>
+        public bool Add(LinksModel link)
+        {
+            return CurrentDAL.Insert(link) > 0;
+        }
+
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="link"></param>
+        /// <returns></returns>
+        public bool Update(LinksModel link)
+        {
+            return CurrentDAL.Update(link) > 0;
+        }
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="linkId"></param>
+        /// <returns></returns>
+        public bool Delete(int linkId)
+        {
+            return CurrentDAL.Delete(linkId) > 0;
+        }
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="link"></param>
+        /// <returns></returns>
+        public bool Delete(LinksModel link)
+        {
+            return Delete(link.ID);
+        }
     }
 }

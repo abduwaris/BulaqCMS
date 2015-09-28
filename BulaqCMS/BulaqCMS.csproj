@@ -71,6 +71,7 @@
     <Content Include="Admin\link_editor.aspx" />
     <Content Include="Admin\Login.aspx" />
     <Content Include="Admin\Main.aspx" />
+    <Content Include="Admin\Navs.aspx" />
     <Content Include="Admin\Options.aspx" />
     <Content Include="Admin\Posts.aspx" />
     <Content Include="Admin\Scripts\Editor\dialogs\emotion\emotion.css" />
@@ -268,6 +269,13 @@
     <Compile Include="Admin\Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Navs.aspx.cs">
+      <DependentUpon>Navs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Navs.aspx.designer.cs">
+      <DependentUpon>Navs.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Options.aspx.cs">
       <DependentUpon>Options.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -316,6 +324,9 @@
     <Compile Include="Admin\_Admin.Master.designer.cs">
       <DependentUpon>_Admin.Master</DependentUpon>
     </Compile>
+    <Compile Include="Bundle\BundleBase.cs" />
+    <Compile Include="Bundle\CssBundle.cs" />
+    <Compile Include="Bundle\ScriptBundle.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -353,6 +364,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="BulaqCMSControl\" />
     <Folder Include="Images\PostsUpload\" />
   </ItemGroup>
   <PropertyGroup>

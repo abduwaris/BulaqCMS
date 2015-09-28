@@ -16,6 +16,13 @@ namespace BulaqCMS.IDAL
         List<NavGroupModel> GetList();
 
         /// <summary>
+        /// 根据 name 获取菜单
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        NavGroupModel GetGroupByName(string name);
+
+        /// <summary>
         /// 新增
         /// </summary>
         /// <param name="group"></param>

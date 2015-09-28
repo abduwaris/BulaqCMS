@@ -171,7 +171,7 @@ namespace BulaqCMS.Admin
         protected override void OnInit(EventArgs e)
         {
             //如果是 Json 并且是 Post
-            if (ResponseType == ResponseDataType.Json && Method == HttpMethod.HttpPost)
+            if (ResponseType == ResponseDataType.Json && Method == HttpMethod.HttpPost && Result.IsSet)
             {
                 Response.Write(JsonConvert.SerializeObject(Result, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }));
                 Response.End();

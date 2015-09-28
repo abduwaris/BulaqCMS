@@ -29,7 +29,7 @@ namespace BulaqCMS.DAL.MySql
         /// <returns></returns>
         public int Insert(LinksModel link)
         {
-            string sql = string.Format("INSERT `{0}links`(`{0}links`.`name`, `{0}links`.`title`, `{0}links`.`url`, `{0}links`.`index`, `{0}links`.`image`, `{0}links`.`des`, `{0}links`.`target`, `{0}links`.`visible`) VALUES(@name, @title, @url, @index, @image, @des, @target, @visible);");
+            string sql = string.Format("INSERT `{0}links`(`{0}links`.`name`, `{0}links`.`title`, `{0}links`.`url`, `{0}links`.`index`, `{0}links`.`image`, `{0}links`.`des`, `{0}links`.`target`, `{0}links`.`visible`) VALUES(@name, @title, @url, @index, @image, @des, @target, @visible);",Helper.Prefix);
             MySqlParameter[] param = { 
                                      new MySqlParameter("@name",link.Name),
                                      new MySqlParameter("@title",link.Title),

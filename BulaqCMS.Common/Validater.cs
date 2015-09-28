@@ -27,6 +27,11 @@ namespace BulaqCMS.Common
         public const string Website = @"^\bhttps?://[-A-Z0-9+&@#/%?=~_|$!:,.;]*[A-Z0-9+&@#/%=~_|$]$";
 
         /// <summary>
+        /// 连接Url
+        /// </summary>
+        ///public const string LinkUrl = @"^((https?|ftp)://)?([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:,.;]*)?$";
+        public const string LinkUrl = @"^(?!\S*?[\.]{2})[-A-Z0-9+&@#/%=~_|$?!:,.]*$";
+        /// <summary>
         /// 用户名
         /// </summary>
         public const string LoginName = @"^[a-zA-Z](?!\S*?[\-_\.]{2,})[a-zA-Z0-9\-_\.]{4,}[a-zA-Z0-9]$";

@@ -58,10 +58,12 @@ namespace BulaqCMS.Models
 
         /// <summary>
         /// 来自
+        /// 0: custom
         /// 1: post
         /// 2: categoriy
         /// 3: link
         /// 4: page
+        /// 5: tag
         /// </summary>
         public short From { get; set; }
 

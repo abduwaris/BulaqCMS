@@ -10,6 +10,16 @@ namespace BulaqCMS.Admin
     /// </summary>
     public class ResponseResult
     {
+
+        private bool _isSet = false;
+        /// <summary>
+        ///(只读)是否设置 ResponseResult 用于判断是否设置
+        /// </summary>
+        [System.Xml.Serialization.SoapIgnore]
+        [Newtonsoft.Json.JsonIgnore()]
+        //[Newtonsoft.Json.JsonIgnore())]
+        public bool IsSet { get { return _isSet; } }
+
         private string _result = "no";
 
         /// <summary>
@@ -21,7 +31,7 @@ namespace BulaqCMS.Admin
             {
                 return _result;
             }
-            set
+            private set
             {
                 _result = value;
             }
@@ -35,13 +45,14 @@ namespace BulaqCMS.Admin
         public ResponseResult SetResult(bool isOk = true)
         {
             this._result = isOk ? "ok" : "no";
+            _isSet = true;
             return this;
         }
 
         /// <summary>
         /// 如果存在错误,表示错误
         /// </summary>
-        public string error { get; set; }
+        public string error { get; private set; }
 
         /// <summary>
         /// 设置返回错误码
@@ -51,13 +62,14 @@ namespace BulaqCMS.Admin
         public ResponseResult SetError(string error)
         {
             this.error = error;
+            _isSet = true;
             return this;
         }
 
         /// <summary>
         /// 额外返回参数
         /// </summary>
-        public object res { get; set; }
+        public object res { get; private set; }
 
         /// <summary>
         /// 设置返回res
@@ -67,6 +79,7 @@ namespace BulaqCMS.Admin
         public ResponseResult SetRes(object res)
         {
             this.res = res;
+            _isSet = true;
             return this;
         }
     }

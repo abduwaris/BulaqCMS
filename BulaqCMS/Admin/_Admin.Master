@@ -74,8 +74,20 @@
                     <li>
                         <a <%:new HtmlString(Pages.ActivePage=="link-editor"?"class=\"active\"":"href=link_editor.aspx") %>><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="ئۇلانما قوشۇش"></span><span class="slide-nav-text">ئۇلانما قوشۇش</span></a>
                     </li>
+                </ul>
+            </li>
+
+            <li class="slide-nav-items">
+                <strong class="slide-nav-item <%:Pages.ActivePage.StartsWith("nav")?"active":"" %>"><span class="glyphicon glyphicon-fire slide-nav-list-icon"></span><span class="slide-nav-text">تىزىملىك </span><span class="glyphicon glyphicon-menu-left slide-nav-icon" data-toggle="tooltip" data-placement="left" title="تىزىملىك"></span></strong>
+                <ul <%:new HtmlString(Pages.ActivePage.StartsWith("nav")?"style=\"display: block\"":"") %>>
                     <li>
-                        <a <%:new HtmlString(Pages.ActivePage=="link-cats"?"class=\"active\"":"href=link_categories.aspx") %>><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="ئۇلانما سەھىپىللىرى"></span><span class="slide-nav-text">ئۇلانما سەھىپىللىرى</span></a>
+                        <a <%:new HtmlString(Pages.ActivePage=="nav-navs"?"class=\"active\"":"href=Links.aspx") %>><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="تىزىملىكلەر"></span><span class="slide-nav-text">تىزىملىكلەر</span></a>
+                    </li>
+                    <li>
+                        <a <%:new HtmlString(Pages.ActivePage=="nav-editor"?"class=\"active\"":"href=link_editor.aspx") %>><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="تىزىملىك قوشۇش"></span><span class="slide-nav-text">تىزىملىك قوشۇش</span></a>
+                    </li>
+                    <li>
+                        <a <%:new HtmlString(Pages.ActivePage=="nav-cats"?"class=\"active\"":"href=link_categories.aspx") %>><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="تىزىملىك سەھىپىللىرى"></span><span class="slide-nav-text">تىزىملىك سەھىپىللىرى</span></a>
                     </li>
                     <li>
                         <a href="#"><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="تىزىملىكىم"></span><span class="slide-nav-text">تىزىملىكىم</span></a>
