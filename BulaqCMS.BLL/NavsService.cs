@@ -15,6 +15,12 @@ namespace BulaqCMS.BLL
             this.CurrentDAL = DAL.NavsDAL;
         }
 
+
+        public List<NavsModel> GetList()
+        {
+            return CurrentDAL.GetList();
+        }
+
         /// <summary>
         /// 根据菜单分类获取菜单
         /// </summary>
@@ -60,6 +66,21 @@ namespace BulaqCMS.BLL
         {
             if (navId <= 0) return false;
             return CurrentDAL.Delete(navId) > 0;
+        }
+
+        ///// <summary>
+        ///// 集合删除
+        ///// </summary>
+        ///// <param name="groupIds"></param>
+        ///// <returns></returns>
+        //public bool Delete(params int[] navIds)
+        //{
+        //    if (navIds == null || navIds.Length < 0) return false;
+        //}
+
+        public bool DeleteByGroup(int groupId)
+        {
+
         }
     }
 }

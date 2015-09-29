@@ -64,6 +64,6 @@ namespace BulaqCMS.IDAL
         /// </summary>
         /// <param name="id">删除的ID</param>
         /// <returns></returns>
-        int Delete(int id);
+        int Delete(int id, bool isGroupId = false);
     }
 }

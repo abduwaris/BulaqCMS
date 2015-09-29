@@ -38,6 +38,11 @@ namespace BulaqCMS.Models
         /// </summary>
         public ICollection<NavsModel> Navs { get; set; }
 
+        /// <summary>
+        /// 菜单个数
+        /// </summary>
+        public int NavsCount { get; set; }
+
         #endregion
     }
 }

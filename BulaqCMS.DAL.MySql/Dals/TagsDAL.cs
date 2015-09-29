@@ -29,7 +29,7 @@ namespace BulaqCMS.DAL.MySql
         /// <returns></returns>
         public List<TagsModel> GetList(params int[] ids)
         {
-            if (ids == null || ids.Length <= 10) return GetList();
+            if (ids == null || ids.Length <= 0) return GetList();
             string sql = string.Format("SELECT * FROM `{0}tags` WHERE `{0}tags`.`tag_id` IN ({1});", Helper.Prefix, string.Join(",", ids));
             return ToModelList(Helper.Select(sql));
         }

@@ -60,15 +60,15 @@
                 background: #b92c28;
             }
 
-                .navs-list-item-tools-item.nav-delete:hover .glyphicon, .navs-list-item-tools-item.nav-visible:hover .glyphicon {
+                .navs-list-item-tools-item.nav-delete:hover .glyphicon, .navs-list-item-tools-item.nav-visible-active:hover .glyphicon {
                     color: #fff;
                 }
 
-            .navs-list-item-tools-item.nav-visible .glyphicon {
+            .navs-list-item-tools-item.nav-visible-active .glyphicon {
                 color: green;
             }
 
-            .navs-list-item-tools-item.nav-visible:hover {
+            .navs-list-item-tools-item.nav-visible-active:hover {
                 background: green;
             }
 
@@ -101,14 +101,14 @@
     <div class="bulaq-header">
         <div class="form-inline">
             <%--<input type="text" name="name" value="" class="form-control input-sm" placeholder="تىزىملىكلەر">--%>
-            <select class="form-control input-sm">
+            <select class="form-control input-sm" id="group_filter">
                 <%foreach (var navG in navGroups)
                   {%>
                 <%:Html(string.Format("<option{0} value=\"{1}\">{2}</option>", navG.ID == navGroup.ID ? " selected=\"selected\"" : "", navG.Name, navG.Title))%>
                 <%} %>
             </select>
-            <input type="button" name="name" value="سۈزۈش" class="btn btn-primary btn-sm">
-            <a class="btn btn-default btn-sm" href="#">تىزىملىك قورۇش</a>
+            <input type="button" id="group_filter_btn" value="سۈزۈش" class="btn btn-primary btn-sm">
+            <a class="btn btn-default btn-sm" href="NavGroup.aspx?mode=new">تىزىملىك قورۇش</a>
         </div>
     </div>
     <%--<script>
@@ -301,112 +301,11 @@
             <div class="bulaq-header clearfix">
                 <%:navGroup.Title %>
                 <div class="form-inline f-left">
-                    <a class="btn btn-info btn-sm" href="#">كۆچۈرۈش</a>
+                    <%--<a class="btn btn-info btn-sm" href="#">كۆچۈرۈش</a>--%>
                     <a class="btn btn-danger btn-sm" href="#">ئۆچۈرۈش</a>
                 </div>
             </div>
             <%:CreateNavs() %>
-
-            <%--<ul class="navs-list">
-                <li class="navs-list-item">سالام دۇنيا
-                    <ul class="navs-list-item-tools clearfix">
-                        <li class="navs-list-item-tools-item" data-to="right" data-nav="2"><span class="glyphicon glyphicon-arrow-right"></span></li>
-                        <li class="navs-list-item-tools-item" data-to="up" data-nav="2"><span class="glyphicon glyphicon-arrow-up"></span></li>
-                        <li class="navs-list-item-tools-item" data-to="down" data-nav="2"><span class="glyphicon glyphicon-arrow-down"></span></li>
-                        <li class="navs-list-item-tools-item" data-to="left" data-nav="2"><span class="glyphicon glyphicon-arrow-left"></span></li>
-                        <li class="navs-list-item-tools-item" data-to="left" data-nav="2"><span class="glyphicon glyphicon-chevron-down"></span></li>
-                    </ul>
-                </li>
-                <li class="navs-list-item">سالام دۇنيا
-                    <ul class="navs-list-item-tools clearfix">
-                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-up"></span></li>
-                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-down"></span></li>
-                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-right"></span></li>
-                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-left"></span></li>
-                    </ul>
-                </li>
-                <li class="navs-list-item">سالام دۇنيا
-                    <ul class="navs-list-item-tools clearfix">
-                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-up"></span></li>
-                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-down"></span></li>
-                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-right"></span></li>
-                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-left"></span></li>
-                    </ul>
-                </li>
-                <li class="navs-list-item navs-list-item-haschild">
-                    <ul class="navs-list">
-                        <li class="navs-list-item">سالام دۇنيا
-                            <ul class="navs-list-item-tools clearfix">
-                                <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-up"></span></li>
-                                <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-down"></span></li>
-                                <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-right"></span></li>
-                                <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-left"></span></li>
-                            </ul>
-                        </li>
-                        <li class="navs-list-item navs-list-item-haschild">
-                            <ul class="navs-list">
-                                <li class="navs-list-item">سالام دۇنيا
-                                    <ul class="navs-list-item-tools clearfix">
-                                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-up"></span></li>
-                                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-down"></span></li>
-                                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-right"></span></li>
-                                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-left"></span></li>
-                                    </ul>
-                                </li>
-                                <li class="navs-list-item">سالام دۇنيا
-                                    <ul class="navs-list-item-tools clearfix">
-                                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-up"></span></li>
-                                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-down"></span></li>
-                                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-right"></span></li>
-                                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-left"></span></li>
-                                    </ul>
-                                </li>
-                                <li class="navs-list-item">سالام دۇنيا
-                                    <ul class="navs-list-item-tools clearfix">
-                                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-up"></span></li>
-                                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-down"></span></li>
-                                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-right"></span></li>
-                                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-left"></span></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="navs-list-item">سالام دۇنيا
-                            <ul class="navs-list-item-tools clearfix">
-                                <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-up"></span></li>
-                                <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-down"></span></li>
-                                <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-right"></span></li>
-                                <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-left"></span></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li class="navs-list-item">سالام دۇنيا
-                    <ul class="navs-list-item-tools clearfix">
-                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-up"></span></li>
-                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-down"></span></li>
-                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-right"></span></li>
-                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-left"></span></li>
-                    </ul>
-                </li>
-                <li class="navs-list-item">سالام دۇنيا
-                    <ul class="navs-list-item-tools clearfix">
-                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-up"></span></li>
-                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-down"></span></li>
-                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-right"></span></li>
-                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-left"></span></li>
-                    </ul>
-                    s
-                </li>
-                <li class="navs-list-item">سالام دۇنيا
-                    <ul class="navs-list-item-tools clearfix">
-                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-up"></span></li>
-                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-down"></span></li>
-                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-right"></span></li>
-                        <li class="navs-list-item-tools-item"><span class="glyphicon glyphicon-arrow-left"></span></li>
-                    </ul>
-                </li>
-            </ul>--%>
         </div>
     </div>
 </asp:Content>
@@ -424,19 +323,32 @@
             'on_category_to_nav_error': 'سەھىپىدىن تىزىملىك قۇرۇشتا خاتالىق كۆرۈلدى!',
             'tag_null': 'خەتكۈچ مەۋجۇت ئەمەس!',
             'on_tag_to_nav_error': 'خەتكۈچتىن تىزىملىك قۇرۇشتا خاتالىق كۆرۈلدى!',
-            '': '',
-            '': '',
-            '': '',
-            '': '',
-            '': '',
-            '': '',
+            'create_ok': 'تىزىملىك قورۇلدى!',
+            'move_ok': 'تىزىملىك يۆتكەلدى!',
+            'delete_ok': 'تىزىملىك ئۆچۈرۈلدى!',
+            'nav_null': 'يۆتكىمەكچى بولغان تىزىملىكنى تاپالمىدى!',
+            'nav_is_first': 'بۇ تىزىملىك ئەڭ ئۈستىدە!',
+            'on_moveup_error': 'تىزىملىكنى ئۈستىگە يۆتكەشتە خاتالىق بار!',
+            'nav_is_last': 'تىزىملىك ئەڭ ئاستىدا!',
+            'on_movedown_error': 'تىزىملىكنى ئاستىغا يۆتكەشتە خاتالىق بار!',
+            'nav_is_in': 'تىزىملىك ئەڭ ئىچىدە!',
+            'on_movein_error': 'تىزىملىكنى ئىچىدە يۆتكەشتە خاتالىق بار!',
+            'nav_is_out': 'تىزىملىك ئەڭ سىرتىدا!',
+            'nav_parent_null': 'ئاتا تىزىملىكنى تاپالمىدى!',
+            'on_moveout_error': 'تىزىملىكىنى سىرتا يۆتكەشتە خاتالىق كۆرۈلدى!',
+            'delete_nav_null': 'ئۆچۈرمەكچن بولغان تىزىملىكنى تاپالمىدى!',
+            'on_delete_error': 'تىزىملىكنى ئۆچۈرۈشتە خاتالىق كۆرۈلدى!',
+            'save_changes': 'ئۆزگەرتىشلەر ساقلاندى!',
+            'visible_nav_null': 'تىزىملىكنى تاپالمىدى!',
+            'on_visible_error': 'تىزىملىكنى ئۆزگەرتىشتە خاتالىق كۆرۈلدى!'
         };
 
         ///处理
-        function _post(_action, objectId) {
+        function _post(_action, objectId, successMsg) {
             if (!objectId || objectId <= 0) return;
+            if (!successMsg || (typeof successMsg).toLowerCase() != 'string') successMsg = 'create_ok';
             $.post('Navs.aspx', { 'action': _action, 'NavGroup': navGroupName, 'ObjectID': objectId }, function (d) {
-                if (d.result == 'ok') alertTip('تىزىملىك قۇرۇلدى!', function () { location.reload(); });
+                if (d.result == 'ok') alertTip(msgs[successMsg], function () { location.reload(); });
                 else {
                     alertTip(msgs[d['error']], 'danger');
                 }
@@ -468,15 +380,28 @@
             var navId = $(this).attr('data-nav');
             if (moveto != 'up' && moveto != 'down' && moveto != 'in' && moveto != 'out') return;
             if (!navId || navId <= 0) return;
-            _post('move_' + moveto, navId);
+            _post('move_' + moveto, navId, 'move_ok');
 
         });
 
         //删除
         $('.nav-delete').click(function () {
             var navId = $(this).attr('data-nav');
-            _post('delete', navId);
+            Confirm('بۇ تىزىملىكنى ئۆچۈرەمسىز؟', 'ئەسكەرتىش', function () { _post('delete', navId, 'delete_ok'); });
         })
 
+        //显示
+        $('.nav-visible').click(function () {
+            var navId = $(this).attr('data-nav');
+            _post('visible', navId, 'save_changes');
+        });
+
+
+        // ToolTip
+        $('[data-toggle="tooltip"]').tooltip();
+
+        $('#group_filter_btn').click(function () {
+            location.href = '?navgroup=' + $('#group_filter').val();
+        });
     </script>
 </asp:Content>

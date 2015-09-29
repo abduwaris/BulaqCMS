@@ -60,7 +60,7 @@
                                 <div class="btn-group">
                                     <a href="?mode=edit&tagid=<%:tag.ID %>" class="btn btn-primary btn-xs">تەھرىرلەش</a>
                                     <input type="button" name="name" value="ئۆچۈرۈش" onclick="_deleteTag(<%:tag.ID%>);" class="btn btn-danger btn-xs" />
-                                    <a href="/Tag/<%:tag.Name %>" class="btn btn-default btn-xs" >كۆرۈش</a>
+                                    <a href="/Tag/<%:tag.Name %>" class="btn btn-default btn-xs">كۆرۈش</a>
                                 </div>
                             </div>
                         </td>

@@ -82,5 +82,21 @@ namespace BulaqCMS.Admin
             _isSet = true;
             return this;
         }
+
+        /// <summary>
+        /// 全部设置
+        /// </summary>
+        /// <param name="isOk"></param>
+        /// <param name="error"></param>
+        /// <param name="res"></param>
+        /// <returns></returns>
+        public ResponseResult Set(bool isOk, string error, object res)
+        {
+            this.res = res;
+            this.result = isOk ? "ok" : "no";
+            this.error = error;
+            _isSet = true;
+            return this;
+        }
     }
 }

@@ -66,7 +66,7 @@
                     <input type="button" name="name" value="ئىزدەش" class="btn btn-primary btn-sm" />
                 </div>
             </div>
-            <table class="table table-hover table-striped table-bordered">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>سەھىپە نامى</th>

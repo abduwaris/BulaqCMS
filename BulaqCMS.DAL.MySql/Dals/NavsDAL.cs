@@ -119,9 +119,9 @@ namespace BulaqCMS.DAL.MySql
         /// </summary>
         /// <param name="id">删除的ID</param>
         /// <returns></returns>
-        public int Delete(int id)
+        public int Delete(int id, bool isGroupId = false)
         {
-            string sql = string.Format("DELETE FROM `{0}navs` WHERE `{0}navs`.`nav_id`={1};", Helper.Prefix, id);
+            string sql = string.Format("DELETE FROM `{0}navs` WHERE `{0}navs`.`{2}_id`={1};", Helper.Prefix, id, isGroupId ? "group" : "nav");
             return Helper.Query(sql);
         }
 
