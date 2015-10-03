@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BulaqCMS.IDAL
+namespace BulaqCMS.Models
 {
 
     public enum PostModified
@@ -32,6 +32,11 @@ namespace BulaqCMS.IDAL
         /// <summary>
         /// 草稿
         /// </summary>
-        Practice
+        Practice,
+
+        /// <summary>
+        /// 修改别名
+        /// </summary>
+        Rename
     }
 }

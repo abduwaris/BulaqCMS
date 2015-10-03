@@ -28,10 +28,16 @@ namespace BulaqCMS.BLL
         /// <param name="isInRecycle">回收站</param>
         /// <param name="isDelFlag">删除</param>
         /// <returns></returns>
-        public List<PostsModel> GetPage(int pageSize, int pageIndex, out int totalCount, int? categoryId = null, int? tagId = null, int? authorId = null, bool? isApproved = null, bool? isDelFlag = null, bool? isPractice = null)
+        public List<PostsModel> GetPostsByPage(int pageSize, int pageIndex, out int totalCount, int? categoryId = null, int? tagId = null, int? authorId = null, bool? isApproved = null, bool? isDelFlag = null, bool? isPractice = null)
         {
             totalCount = CurrentDAL.Count(categoryId, tagId, authorId, isApproved, isDelFlag, isPractice);
-            return CurrentDAL.GetPage(pageSize, pageIndex, PostsOrderByMode.ID_Desc, categoryId, tagId, authorId, isApproved, isDelFlag);
+            return CurrentDAL.GetPostsByPage(pageSize, pageIndex, PostsOrderByMode.ID_Desc, categoryId, tagId, authorId, isApproved, isDelFlag);
+        }
+
+        public List<PostsModel> OpenPages(int pageSize, int pageIndex, out int totalCount)
+        {
+            return GetPostsByPage(pageSize, pageIndex, out totalCount, null, null, null, true, false, false);
+
         }
 
         /// <summary>
@@ -71,10 +77,10 @@ namespace BulaqCMS.BLL
         /// <param name="includeCategories">是否引入专辑</param>
         /// <param name="includeTags">是否引入标签</param>
         /// <returns></returns>
-        public List<PostsModel> GetPage(int pageSize, int pageIndex, out int totalCount, bool includeCommentsCount = false, bool includeAuthor = false, bool includeCategories = false, bool includeTags = false, int? categoryId = null, int? tagId = null, int? authorId = null, bool? isApproved = null, bool? isDelFlag = null, bool? isPractice = null)
+        public List<PostsModel> GetPostsByPage(int pageSize, int pageIndex, out int totalCount, bool includeCommentsCount = false, bool includeAuthor = false, bool includeCategories = false, bool includeTags = false, int? categoryId = null, int? tagId = null, int? authorId = null, bool? isApproved = null, bool? isDelFlag = null, bool? isPractice = null)
         {
             totalCount = CurrentDAL.Count(categoryId, tagId, authorId, isApproved, isDelFlag, isPractice);
-            var posts = CurrentDAL.GetPage(pageSize, pageIndex, PostsOrderByMode.ID_Desc, categoryId, tagId, authorId, isApproved, isDelFlag);
+            var posts = CurrentDAL.GetPostsByPage(pageSize, pageIndex, PostsOrderByMode.ID_Desc, categoryId, tagId, authorId, isApproved, isDelFlag);
             if (includeCommentsCount || includeAuthor || includeCategories || includeTags)
                 foreach (var post in posts)
                 {
@@ -86,6 +92,23 @@ namespace BulaqCMS.BLL
             return posts;
         }
 
+        /// <summary>
+        /// 获取所有页面
+        /// </summary>
+        /// <returns></returns>
+        public List<PostsModel> GetPages()
+        {
+            return CurrentDAL.GetPages();
+        }
+
+        /// <summary>
+        /// 获取可以显示的页面
+        /// </summary>
+        /// <returns></returns>
+        public List<PostsModel> GetOpenPages()
+        {
+            return GetPages().Where(p => p.Approved).ToList();
+        }
 
         public PostsModel GetPostById(int id)
         {
@@ -119,7 +142,7 @@ namespace BulaqCMS.BLL
             return CurrentDAL.Count(isDelflag: true);
         }
 
-        
+
 
         /// <summary>
         /// 根据文章名获取文章
@@ -155,20 +178,9 @@ namespace BulaqCMS.BLL
         /// Practice
         /// </param>
         /// <returns></returns>
-        public bool Update(PostsModel post, params string[] modified)
+        public bool Update(PostsModel post, PostModified mode)
         {
-            string[] mods = { "save", "send", "image", "approve", "recycle", "delflag", "practice" };
-            if (modified == null || modified.Length <= 0) return false;
-            if (modified.Count(p => mods.Contains(p.ToLower())) <= 0) return false;
-            modified = modified.Select(p => p.ToLower()).ToArray();
-            PostModified? mod = null;
-            if (modified.Contains("save")) mod = mod | PostModified.Save;
-            if (modified.Contains("send")) mod = mod | PostModified.Send;
-            if (modified.Contains("image")) mod = mod | PostModified.Image;
-            if (modified.Contains("approve")) mod = mod | PostModified.Approve;
-            if (modified.Contains("delflag")) mod = mod | PostModified.DelFlag;
-            if (modified.Contains("practice")) mod = mod | PostModified.Practice;
-            return CurrentDAL.Update(post, (PostModified)mod) > 0;
+            return CurrentDAL.Update(post, mode) > 0;
         }
 
         /// <summary>

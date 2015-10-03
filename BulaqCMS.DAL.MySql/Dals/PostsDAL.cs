@@ -89,10 +89,12 @@ namespace BulaqCMS.DAL.MySql
         /// <param name="isDelflag">删除标识</param>
         /// <param name="isPractice">草稿</param>
         /// <returns></returns>
-        public List<PostsModel> GetPage(int pageSize, int pageIndex, PostsOrderByMode orderByMode, int? categoryId = null, int? tagId = null, int? authorid = null, bool? isApproved = null, bool? isDelflag = null, bool? isPractice = null)
+        public List<PostsModel> GetPostsByPage(int pageSize, int pageIndex, PostsOrderByMode orderByMode, int? categoryId = null, int? tagId = null, int? authorid = null, bool? isApproved = null, bool? isDelflag = null, bool? isPractice = null)
         {
             Dictionary<string, object> dics = new Dictionary<string, object>();
             List<string> wheres = new List<string>();
+            //页面
+            wheres.Add("`post_type`=false");
             if (authorid != null)
             {
                 dics.Add("author_id", authorid);
@@ -155,8 +157,8 @@ namespace BulaqCMS.DAL.MySql
             //    }
             //}
 
-            if (wheres.Count > 0)
-                sql += " WHERE " + string.Join(" AND ", wheres);
+            //if (wheres.Count > 0)
+            sql += " WHERE " + string.Join(" AND ", wheres);
 
             ///Order By
             List<string> orderBy = new List<string>();
@@ -259,6 +261,16 @@ namespace BulaqCMS.DAL.MySql
         {
             if (comIds == null || comIds.Length <= 0) return new List<PostsModel>();
             string sql = string.Format("select DISTINCT `{0}posts`.* from `{0}comments` LEFT JOIN `{0}posts` on `{0}posts`.post_id=`{0}comments`.post_id where `{0}comments`.com_id IN ({1});", Helper.Prefix, string.Join(",", comIds));
+            return ToModelList(Helper.Select(sql));
+        }
+
+        /// <summary>
+        /// 获取静态页
+        /// </summary>
+        /// <returns></returns>
+        public List<PostsModel> GetPages()
+        {
+            string sql = string.Format("select * from `{0}posts` where `{0}posts`.`post_type`=true;", Helper.Prefix);
             return ToModelList(Helper.Select(sql));
         }
         /// <summary>
@@ -378,16 +390,19 @@ namespace BulaqCMS.DAL.MySql
 
             if (modi == PostModified.Save)
             {
-                sets.Add("`{0}posts`.`post_name`= @pname");
                 sets.Add("`{0}posts`.`post_title`= @title");
                 sets.Add("`{0}posts`.`content`= @content");
                 sets.Add("`{0}posts`.`modified`= @modified");
                 sets.Add("`{0}posts`.`modified_time`= @modifiedtime");
-                param.Add(new MySqlParameter("@pname", post.Name));
                 param.Add(new MySqlParameter("@title", post.Title));
                 param.Add(new MySqlParameter("@content", post.Content));
-                param.Add(new MySqlParameter("@modified", true));
-                param.Add(new MySqlParameter("@modifiedtime", DateTime.Now));
+                param.Add(new MySqlParameter("@modified", post.Modified));
+                param.Add(new MySqlParameter("@modifiedtime", post.LastModifiedTime));
+            }
+            if (modi == PostModified.Rename)
+            {
+                sets.Add("`{0}posts`.`post_name`= @pname");
+                param.Add(new MySqlParameter("@pname", post.Name));
             }
             if (modi == PostModified.Send)
             {
@@ -412,7 +427,7 @@ namespace BulaqCMS.DAL.MySql
             sets.Add("`{0}posts`.`del_flag`= @del");
             sets.Add("`{0}posts`.`post_image`= @image");
             sets.Add("`{0}posts`.`is_practice`= @practice");
-            sets.Add("`{0}posts`.`in_recycle`= @in_recycle");
+            //sets.Add("`{0}posts`.`in_recycle`= @in_recycle");
             sets.Add("`{0}posts`.`post_name`= @pname");
             sets.Add("`{0}posts`.`post_title`= @title");
             sets.Add("`{0}posts`.`content`= @content");
@@ -457,7 +472,7 @@ namespace BulaqCMS.DAL.MySql
             post.LastModifiedTime = row["modified_time"] != null && !row.Table.Columns["modified_time"].AllowDBNull ? (Nullable<DateTime>)Convert.ToDateTime(row["modified_time"]) : null;
 
             if (row["can_comment"] != null) post.CanComment = Convert.ToBoolean(row["can_comment"]);
-            if (row["password_state"] != null) post.PasswordState = Convert.ToBoolean(row["password_state"]);
+            if (row["password_state"] != null) post.NeadPassword = Convert.ToBoolean(row["password_state"]);
             if (row["post_type"] != null) post.PostType = Convert.ToBoolean(row["post_type"]);
             if (row["modified"] != null) post.Modified = Convert.ToBoolean(row["modified"]);
             if (row["del_flag"] != null) post.DelFlag = Convert.ToBoolean(row["del_flag"]);

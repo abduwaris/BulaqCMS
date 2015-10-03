@@ -55,12 +55,12 @@ namespace BulaqCMS.DAL.MySql
         /// <summary>
         /// 根据 关系 ID 删除
         /// </summary>
-        /// <param name="pc_id"></param>
+        /// <param name="ids"></param>
         /// <returns></returns>
-        public int Delete(params int[] pc_id)
+        public int Delete(ModifiedMode mode, params int[] ids)
         {
-            if (pc_id == null || pc_id.Length <= 0) return 0;
-            string sql = string.Format("DELETE FROM `{0}post_in_cats` WHERE `{0}post_in_cats`.`pc_id` IN ({1});", Helper.Prefix, string.Join(",", pc_id));
+            if (ids == null || ids.Length <= 0) return 0;
+            string sql = string.Format("DELETE FROM `{0}post_in_cats` WHERE `{0}post_in_cats`.`{2}_id` IN ({1});", Helper.Prefix, string.Join(",", ids), mode == ModifiedMode.Post ? "post" : (mode == ModifiedMode.Self ? "pc" : "cat"));
             return Helper.Query(sql);
         }
 

@@ -3469,9 +3469,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
                     options.initialFrameHeight = options.minFrameHeight = $(container).height() || UM.defaultHeight;
                 }
 
-                container.style.width = /%$/.test(options.initialFrameWidth) ?  '100%' : options.initialFrameWidth -
-                    getStyleValue("padding-left")-
-                    getStyleValue("padding-right")  +'px';
+                container.style.width = '100%';// /%$/.test(options.initialFrameWidth) ?  '100%' : options.initialFrameWidth - getStyleValue("padding-left")- getStyleValue("padding-right")  +'px';
 
                 var height = /%$/.test(options.initialFrameHeight) ?  '100%' : (options.initialFrameHeight - getStyleValue("padding-top")- getStyleValue("padding-bottom") );
                 if(this.options.autoHeightEnabled){
@@ -9733,7 +9731,7 @@ UM.ui.define('separator', {
                 }
 
                 $container.css({
-                    width: options.initialFrameWidth,
+                    width: '100%',//options.initialFrameWidth,
                     zIndex:editor.getOpt('zIndex')
                 });
 

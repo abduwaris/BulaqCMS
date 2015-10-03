@@ -35,10 +35,15 @@ namespace BulaqCMS.BLL
             return cats;
         }
 
-        //public List<CategoriesModel> GetList(params int[] cids)
-        //{
-
-        //}
+        /// <summary>
+        /// 文章
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <returns></returns>
+        public List<CategoriesModel> CategoriesByPost(int postId)
+        {
+            return CurrentDAL.GetList(postId);
+        }
 
         /// <summary>
         /// 

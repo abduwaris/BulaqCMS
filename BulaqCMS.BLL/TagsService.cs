@@ -42,6 +42,16 @@ namespace BulaqCMS.BLL
             return CurrentDAL.GetListByPost(postId);
         }
 
+        /// <summary>
+        /// 根据 titles 获取标签
+        /// </summary>
+        /// <param name="titles"></param>
+        /// <returns></returns>
+        public List<TagsModel> GetTagsByTitles(params string[] titles)
+        {
+            return CurrentDAL.GetTagsByTitles(titles);
+        }
+
         public TagsModel GetTags(int tagId)
         {
             return CurrentDAL.GetList(tagId).FirstOrDefault();
@@ -55,6 +65,27 @@ namespace BulaqCMS.BLL
         public bool Add(TagsModel tag)
         {
             return CurrentDAL.Insert(tag) > 0;
+        }
+
+        /// <summary>
+        /// 批量添加
+        /// </summary>
+        /// <param name="tags"></param>
+        /// <returns></returns>
+        public bool AddRange(List<TagsModel> tags)
+        {
+            return CurrentDAL.InsertRange(tags) > 0;
+        }
+
+        /// <summary>
+        /// 批量添加
+        /// </summary>
+        /// <param name="titles"></param>
+        /// <returns></returns>
+        public bool AddRange(params string[] titles)
+        {
+            if (titles == null || titles.Length <= 0) return false;
+            return AddRange(titles.Select(p => new TagsModel() { Title = p, Des = "", Name = Guid.NewGuid().ToString().Replace("-", "") }).ToList());
         }
 
         /// <summary>

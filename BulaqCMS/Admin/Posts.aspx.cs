@@ -110,7 +110,7 @@ namespace BulaqCMS.Admin
 
             //页码
             pageIndex = !string.IsNullOrEmpty(Request["page"]) && int.TryParse(Request["page"], out pageIndex) ? Convert.ToInt32(Request["page"]) : 1;
-            postList = Service.PostsService.GetPage(pageSize, pageIndex, out totalCount, false, true, true, true, catId, tagId, authorId, isAprove, isDelfalg);
+            postList = Service.PostsService.GetPostsByPage(pageSize, pageIndex, out totalCount, false, true, true, true, catId, tagId, authorId, isAprove, isDelfalg);
             commentsInPosts = postList.Count > 0 ? Service.CommentsService.CommentsInPosts(postList.Select(p => p.ID).ToArray()) : new List<CommentsModel>();
             //获取个数
             allCount = Service.PostsService.AllCount();

@@ -45,9 +45,14 @@ namespace BulaqCMS.IDAL
         /// <param name="isInRecycle">回收站</param>
         /// <param name="isDelflag">删除标识</param>
         /// <returns></returns>
-        List<PostsModel> GetPage(int pageSize, int pageIndex, PostsOrderByMode orderByMode, int? categoryId = null, int? tagId = null, int? authorid = null, bool? isApproved = null, bool? isDelflag = null, bool? isPractice = null);
+        List<PostsModel> GetPostsByPage(int pageSize, int pageIndex, PostsOrderByMode orderByMode, int? categoryId = null, int? tagId = null, int? authorid = null, bool? isApproved = null, bool? isDelflag = null, bool? isPractice = null);
 
 
+        /// <summary>
+        /// 获取静态页
+        /// </summary>
+        /// <returns></returns>
+        List<PostsModel> GetPages();
 
         /// <summary>
         /// 根据 ID 获取文章

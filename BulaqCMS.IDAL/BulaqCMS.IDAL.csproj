@@ -39,13 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommentModified.cs" />
-    <Compile Include="CommentOrderByMode.cs" />
-    <Compile Include="DeleteMode.cs" />
+    <Compile Include="IDALSession.cs" />
     <Compile Include="IDals\ICategoriesDAL.cs" />
     <Compile Include="IDals\ICommentOptionsDAL.cs" />
     <Compile Include="IDals\ICommentsDAL.cs" />
-    <Compile Include="IDALSession.cs" />
     <Compile Include="IDals\ILinksDAL.cs" />
     <Compile Include="IDals\INavGroupDAL.cs" />
     <Compile Include="IDals\INavsDAL.cs" />
@@ -58,8 +55,6 @@
     <Compile Include="IDals\IThemeOptionsDAL.cs" />
     <Compile Include="IDals\IUserOptionsDAL.cs" />
     <Compile Include="IDals\IUsersDAL.cs" />
-    <Compile Include="PostModified.cs" />
-    <Compile Include="PostsOrderByMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

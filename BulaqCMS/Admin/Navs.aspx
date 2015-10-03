@@ -85,13 +85,13 @@
             padding: 10px 0;
         }
 
-        .add-link, .add-tag {
+        .add-link, .add-tag, .add-page, .add-post {
             display: inline-block;
             height: 100%;
             cursor: pointer;
         }
 
-            .add-link:hover, .add-tag:hover {
+            .add-link:hover, .add-tag:hover, .add-page:hover, .add-post:hover {
                 color: #0094ff;
             }
     </style>
@@ -164,132 +164,34 @@
                     </div>
                     <div role="tabpanel" class="tab-pane" id="from-posts">
                         <table class="table table-hover">
+                            <%foreach (var post in allPosts)
+                              {%>
                             <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
+                                <td><%:post.Title %></td>
+                                <td width="40"><span data-postid="<%:post.ID %>" class="add-post glyphicon glyphicon-plus"></span></td>
                             </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
+                            <%} %>
                         </table>
                         <ul class="pagination pagination-sm">
-                            <li><a href="?page=1">1</a></li>
-                            <li><a href="?page=1">2</a></li>
-                            <li><a href="?page=1">3</a></li>
-                            <li><a href="?page=1">4</a></li>
-                            <li><a href="?page=1">5</a></li>
-                            <li><a href="?page=1">6</a></li>
-                            <li><a href="?page=1">7</a></li>
-                            <li><a href="?page=1">8</a></li>
+                            <li><a href="#page-1">1</a></li>
+                            <li><a href="#page">2</a></li>
+                            <li><a href="#page">3</a></li>
+                            <li><a href="#page">4</a></li>
+                            <li><a href="#page">5</a></li>
+                            <li><a href="#page">6</a></li>
+                            <li><a href="#page">7</a></li>
+                            <li><a href="#page">8</a></li>
                         </ul>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="from-pages">
                         <table class="table table-hover">
+                            <%foreach (var page in allPages)
+                              {%>
                             <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
+                                <td><%:page.Title %></td>
+                                <td width="40"><span data-pageid="<%:page.ID %>" class="add-page glyphicon glyphicon-plus"></span></td>
                             </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
-                            <tr>
-                                <td>يېڭى ئۇلانما</td>
-                                <td width="40"><span class="glyphicon glyphicon-plus"></span></td>
-                            </tr>
+                            <%} %>
                         </table>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="from-custom">ئىختىيارى</div>
@@ -302,7 +204,7 @@
                 <%:navGroup.Title %>
                 <div class="form-inline f-left">
                     <%--<a class="btn btn-info btn-sm" href="#">كۆچۈرۈش</a>--%>
-                    <a class="btn btn-danger btn-sm" href="#">ئۆچۈرۈش</a>
+                    <button class="btn btn-danger btn-sm" type="button" id="delete_group" data-groupid="<%:navGroup.ID %>">ئۆچۈرۈش</button>
                 </div>
             </div>
             <%:CreateNavs() %>
@@ -340,7 +242,10 @@
             'on_delete_error': 'تىزىملىكنى ئۆچۈرۈشتە خاتالىق كۆرۈلدى!',
             'save_changes': 'ئۆزگەرتىشلەر ساقلاندى!',
             'visible_nav_null': 'تىزىملىكنى تاپالمىدى!',
-            'on_visible_error': 'تىزىملىكنى ئۆزگەرتىشتە خاتالىق كۆرۈلدى!'
+            'on_visible_error': 'تىزىملىكنى ئۆزگەرتىشتە خاتالىق كۆرۈلدى!',
+            'on_post_to_nav_error': 'يازمىدىن تىزىملىك قۇرۇشتا خاتالىق كۆرۈلدى!',
+            'post_null': 'يازمىنى تاپالمىدى!',
+            'group_null': 'ئۆچۈركەمچى بولغان تىزىملىك سەھىپىسىنى تاپالمىدى!'
         };
 
         ///处理
@@ -365,6 +270,12 @@
         $('.add-category').click(function () {
             var catId = $(this).attr('data-categoryid');
             _post('from-category-nav', catId);
+        });
+
+        ///文章添加到菜单
+        $('.add-post').click(function () {
+            var postId = $(this).attr('data-postid');
+            _post('from-post-nav', postId);
         });
 
         //添加标签
@@ -396,6 +307,17 @@
             _post('visible', navId, 'save_changes');
         });
 
+        //删除整个菜单
+        $('#delete_group').click(function () {
+            var gid = $(this).attr('data-groupid');
+            if (!gid || gid <= 0) return;
+            Confirm('بۇ تىزىملىك سەھىپىسىنى راستىنلا ئۆچۈرەمسىز؟', 'ئەسكەرتىش', function () {
+                $.post('NavGroup.aspx', { 'Mode': 'delete', 'NavGroupID': gid }, function (d) {
+                    if (d['result'] == 'ok') alertTip('تىزىملىك ئۆچۈرۈلدى!', location.href = location.pathname);
+                    else alertTip(msgs[d['error']], 'danger');
+                }, 'json').error(function () { alertTip(msgs.server_error, 'danger') });
+            });
+        });
 
         // ToolTip
         $('[data-toggle="tooltip"]').tooltip();

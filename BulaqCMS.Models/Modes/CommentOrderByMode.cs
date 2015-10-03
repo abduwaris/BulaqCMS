@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BulaqCMS.IDAL
+namespace BulaqCMS.Models
 {
     /// <summary>
     /// 评论查询排序模式

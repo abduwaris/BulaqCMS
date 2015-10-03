@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BulaqCMS.IDAL
+namespace BulaqCMS.Models
 {
     /// <summary>
     /// 评论修改模式
@@ -27,7 +27,7 @@ namespace BulaqCMS.IDAL
         /// 删除
         /// </summary>
         Del,
-       
+
         /// <summary>
         /// 父
         /// </summary>

@@ -115,6 +115,18 @@ namespace BulaqCMS.DAL.MySql
             return Helper.Query(sql);
         }
 
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="mode"></param>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public int Delete(ModifiedMode mode, params int[] ids)
+        {
+            string sql = string.Format("DELETE FROM `{0}post_in_tags` WHERE `{0}post_in_tags`.`{1}_id` in ({2});", Helper.Prefix, mode == ModifiedMode.Self ? "tp" : mode == ModifiedMode.TagOrCategoriy ? "tag" : "post", string.Join(",", ids));
+            return Helper.Query(sql);
+        }
+
         protected override PostInTagsModel ToModel(DataRow row)
         {
             PostInTagsModel tag = new PostInTagsModel();

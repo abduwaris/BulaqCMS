@@ -131,6 +131,7 @@ namespace BulaqCMS.DAL.MySql
             if (row["nav_id"] != null) nav.ID = Convert.ToInt32(row["nav_id"]);
             if (row["group_id"] != null) nav.GroupID = Convert.ToInt32(row["group_id"]);
             if (row["parent_id"] != null) nav.ParentID = Convert.ToInt32(row["parent_id"]);
+            if (row["from_id"] != null) nav.FromID = Convert.ToInt32(row["from_id"]);
             if (row["index"] != null) nav.Index = Convert.ToInt16(row["index"]);
             if (row["target"] != null) nav.Target = Convert.ToInt16(row["target"]);
             if (row["from"] != null) nav.From = Convert.ToInt16(row["from"]);

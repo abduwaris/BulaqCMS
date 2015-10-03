@@ -68,6 +68,11 @@ namespace BulaqCMS.Models
         public short From { get; set; }
 
         /// <summary>
+        /// 菜单来历ID, 如果没有来历就是 0
+        /// </summary>
+        public int FromID { get; set; }
+
+        /// <summary>
         /// 描述
         /// </summary>
         public string Des { get; set; }

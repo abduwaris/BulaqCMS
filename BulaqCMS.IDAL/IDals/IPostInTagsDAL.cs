@@ -74,5 +74,13 @@ namespace BulaqCMS.IDAL
         /// <param name="mode">删除模式</param>
         /// <returns></returns>
         int Delete(int id, ModifiedMode mode);
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="mode"></param>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        int Delete(ModifiedMode mode, params int[] ids);
     }
 }

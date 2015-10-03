@@ -38,9 +38,15 @@ namespace BulaqCMS.BLL
         /// <param name="id">键 Id</param>
         /// <param name="mode">删除模式</param>
         /// <returns></returns>
-        public int Delete(int id, ModifiedMode mode)
+        public bool Delete(int id, ModifiedMode mode)
         {
-            return CurrentDAL.Delete(id, mode);
+            return CurrentDAL.Delete(id, mode) > 0;
+        }
+
+        public bool Delete(ModifiedMode mode, params int[] ids)
+        {
+            if (ids == null || ids.Length <= 0) return false;
+            return CurrentDAL.Delete(mode, ids) > 0;
         }
 
         /// <summary>

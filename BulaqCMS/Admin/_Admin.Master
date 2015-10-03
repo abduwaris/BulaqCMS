@@ -86,9 +86,6 @@
                     <li>
                         <a <%:new HtmlString(Pages.ActivePage=="nav_groups"?"class=\"active\"":"href=NavGroup.aspx") %>><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="تىزىملىك سەھىپىسى"></span><span class="slide-nav-text">تىزىملىك سەھىپىسى</span></a>
                     </li>
-                    <li>
-                        <a href="#"><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="تىزىملىكىم"></span><span class="slide-nav-text">تىزىملىكىم</span></a>
-                    </li>
                 </ul>
             </li>
 
@@ -103,9 +100,6 @@
                     </li>
                     <li>
                         <a href="#"><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="بىكەت باش بەت ئۇسلۇبى"></span><span class="slide-nav-text">بىكەت باش بەت ئۇسلۇبى</span></a>
-                    </li>
-                    <li>
-                        <a href="#"><span class="glyphicon glyphicon-th-list slide-nav-list-icon" data-toggle="tooltip" data-placement="left" title="تىزىملىكىم"></span><span class="slide-nav-text">تىزىملىكىم</span></a>
                     </li>
                 </ul>
             </li>

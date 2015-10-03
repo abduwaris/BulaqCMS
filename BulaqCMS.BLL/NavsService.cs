@@ -80,7 +80,7 @@ namespace BulaqCMS.BLL
 
         public bool DeleteByGroup(int groupId)
         {
-
+            return CurrentDAL.Delete(groupId, true) > 0;
         }
     }
 }

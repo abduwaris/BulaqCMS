@@ -72,7 +72,7 @@ namespace BulaqCMS.Models
         /// <summary>
         /// 浏览文章是否需要密码
         /// </summary>
-        public bool PasswordState { get; set; }
+        public bool NeadPassword { get; set; }
 
         /// <summary>
         /// 文章浏览密码, 如果文章不需要密码,不生效

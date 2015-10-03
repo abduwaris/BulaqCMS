@@ -43,6 +43,11 @@
     <Compile Include="CommentOptions.cs" />
     <Compile Include="Comments.cs" />
     <Compile Include="Links.cs" />
+    <Compile Include="Modes\CommentModified.cs" />
+    <Compile Include="Modes\CommentOrderByMode.cs" />
+    <Compile Include="Modes\DeleteMode.cs" />
+    <Compile Include="Modes\PostModified.cs" />
+    <Compile Include="Modes\PostsOrderByMode.cs" />
     <Compile Include="NavGroup.cs" />
     <Compile Include="Navs.cs" />
     <Compile Include="Options.cs" />
@@ -55,6 +60,9 @@
     <Compile Include="ThemeOptions.cs" />
     <Compile Include="UserOptions.cs" />
     <Compile Include="Users.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

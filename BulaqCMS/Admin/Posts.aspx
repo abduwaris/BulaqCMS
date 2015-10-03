@@ -33,16 +33,19 @@
                         <a href="#"><%:post.Title %></a>
                         <div class="tools clearfix">
                             <div class="btn-group">
-                                <a href="Editor.aspx?mode=edit?pid=<%:post.ID %>" class="btn btn-primary btn-xs">تەھرىرلەش</a>
-                                <%if(post.Approved) {%>
+                                <a href="Editor.aspx?mode=edit&postid=<%:post.ID %>" class="btn btn-primary btn-xs">تەھرىرلەش</a>
+                                <%if (post.Approved)
+                                  {%>
                                 <input type="button" class="btn btn-warning btn-xs" name="name" value="تەستىقلىماسلىق" />
-                                <%}else{ %>
-                                <input type="button" class="btn btn-success btn-xs" name="name" value="تەستىقلاش" />
-                                <%}if (post.DelFlag)
-                                  { %>
-                                <input type="button" class="btn btn-danger btn-xs" name="name" value="ئەخلەتلەش" /><%}
+                                <%}
                                   else
                                   { %>
+                                <input type="button" class="btn btn-success btn-xs" name="name" value="تەستىقلاش" />
+                                <%} if (post.DelFlag)
+                                  { %>
+                                <input type="button" class="btn btn-danger btn-xs" name="name" value="ئەخلەتلەش" /><%}
+                      else
+                      { %>
                                 <input type="button" class="btn btn-danger btn-xs" name="name" value="مەڭگۈلۈك ئۆچۈرۈش" />
                                 <input type="button" class="btn btn-info btn-xs" name="name" value="ئەسلىگە قايتۇرۇش" /><%} %>
                             </div>

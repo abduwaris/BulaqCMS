@@ -30,6 +30,13 @@ namespace BulaqCMS.IDAL
         List<TagsModel> GetListByPost(int postId);
 
         /// <summary>
+        /// 根据 titles 获取标签
+        /// </summary>
+        /// <param name="titles"></param>
+        /// <returns></returns>
+        List<TagsModel> GetTagsByTitles(params string[] titles);
+
+        /// <summary>
         /// 根据 Title 索索
         /// </summary>
         /// <param name="titleLike">title</param>
@@ -42,6 +49,13 @@ namespace BulaqCMS.IDAL
         /// <param name="tag">要新增的标签</param>
         /// <returns></returns>
         int Insert(TagsModel tag);
+
+        /// <summary>
+        /// 批量添加
+        /// </summary>
+        /// <param name="tags"></param>
+        /// <returns></returns>
+        int InsertRange(List<TagsModel> tags);
 
         /// <summary>
         /// 修改标签

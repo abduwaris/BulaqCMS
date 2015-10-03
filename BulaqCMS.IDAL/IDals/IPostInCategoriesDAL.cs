@@ -36,7 +36,8 @@ namespace BulaqCMS.IDAL
         /// </summary>
         /// <param name="pc_id"></param>
         /// <returns></returns>
-        int Delete(params int[] pc_id);
+        int Delete(ModifiedMode mode, params int[] pc_id);
+
 
         /// <summary>
         /// 根据关系着删除

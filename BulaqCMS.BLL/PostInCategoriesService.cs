@@ -25,9 +25,9 @@ namespace BulaqCMS.BLL
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        public int Delete(params int[] ids)
+        public int Delete(ModifiedMode mode, params int[] ids)
         {
-            return CurrentDAL.Delete(ids);
+            return CurrentDAL.Delete(mode, ids);
         }
 
         /// <summary>

@@ -46,6 +46,26 @@ namespace BulaqCMS.DAL.MySql
         }
 
         /// <summary>
+        /// 根据 titles 获取标签
+        /// </summary>
+        /// <param name="titles"></param>
+        /// <returns></returns>
+        public List<TagsModel> GetTagsByTitles(params string[] titles)
+        {
+            if (titles == null || titles.Length <= 0) return new List<TagsModel>();
+            List<MySqlParameter> param = new List<MySqlParameter>();
+            List<string> values = new List<string>();
+            for (int i = 0; i < titles.Length; i++)
+            {
+                string pname = "@param" + i;
+                param.Add(new MySqlParameter(pname, titles[i]));
+                values.Add(pname);
+            }
+            string sql = string.Format("select * from `{0}tags` where `{0}tags`.`title` in ({1});", Helper.Prefix, string.Join(",", values));
+            return ToModelList(Helper.Select(sql, param.ToArray()));
+        }
+
+        /// <summary>
         /// 根据 Title 索索
         /// </summary>
         /// <param name="titleLike">title 或者 Name</param>
@@ -53,7 +73,7 @@ namespace BulaqCMS.DAL.MySql
         /// <returns></returns>
         public List<TagsModel> Search(string titleLike, bool isName = false)
         {
-            string sql = string.Format("SELECT * FROM `{0}tags` WHERE `{0}tags`.`{1}` LIKE @like;", Helper.Prefix,isName?"name":"title");
+            string sql = string.Format("SELECT * FROM `{0}tags` WHERE `{0}tags`.`{1}` LIKE @like;", Helper.Prefix, isName ? "name" : "title");
             return ToModelList(Helper.Select(sql, new MySqlParameter("@like", titleLike)));
         }
 
@@ -73,6 +93,30 @@ namespace BulaqCMS.DAL.MySql
                                      new MySqlParameter("@des",tag.Des)
                                      };
             return Helper.Query(sql, param);
+        }
+
+        /// <summary>
+        /// 批量添加
+        /// </summary>
+        /// <param name="tags"></param>
+        /// <returns></returns>
+        public int InsertRange(List<TagsModel> tags)
+        {
+            //insert into tags(tags.title,tags.`name`,tags.des) VALUES('111','111','111'),('111','111','111'),('111','111','111');
+            List<MySqlParameter> param = new List<MySqlParameter>();
+            List<string> values = new List<string>();
+            for (int i = 0; i < tags.Count; i++)
+            {
+                string ptitle = "@title" + i;
+                string pname = "@name" + i;
+                string pdes = "@des" + i;
+                values.Add(string.Format("({0},{1},{2})", ptitle, pname, pdes));
+                param.Add(new MySqlParameter(ptitle, tags[i].Title));
+                param.Add(new MySqlParameter(pname, tags[i].Name));
+                param.Add(new MySqlParameter(pdes, tags[i].Des));
+            }
+            string sql = string.Format("insert into `{0}tags`(`{0}tags`.`title`,`{0}tags`.`name`,`{0}tags`.`des`) VALUES{1};", Helper.Prefix, string.Join(",", values));
+            return Helper.Query(sql);
         }
 
         /// <summary>
