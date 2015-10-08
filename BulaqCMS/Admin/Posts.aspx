@@ -9,12 +9,16 @@
             <a class="btn btn-default btn-sm" href="?view=delflag">ئەخلەت يازمىلار (<%:delFlagCount %>)</a>
         </div>
         <div class="form-inline f-left">
-            <input type="text" name="name" value="" class="form-control input-sm" placeholder="تىمىسىدىن ئىزدەپ باقامسىز؟" />
-            <input type="button" name="name" value="ئىزدەش" class="btn btn-primary btn-sm" />
+            <form action="?" method="get" id="frm-search">
+                <input type="hidden" name="view" value="search" />
+                <input type="text" name="s" class="form-control input-sm" placeholder="تىمىسىدىن ئىزدەپ باقامسىز؟" />
+                <input type="submit" value="ئىزدەش" class="btn btn-primary btn-sm" />
+                
+            </form>
         </div>
     </div>
     <div>
-        <table class="table table-bordered table-hover">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th>تىما</th>
@@ -36,18 +40,18 @@
                                 <a href="Editor.aspx?mode=edit&postid=<%:post.ID %>" class="btn btn-primary btn-xs">تەھرىرلەش</a>
                                 <%if (post.Approved)
                                   {%>
-                                <input type="button" class="btn btn-warning btn-xs" name="name" value="تەستىقلىماسلىق" />
+                                <input type="button" class="btn btn-warning btn-xs" name="Approve" data-value="false" data-postid="<%:post.ID %>" value="تەستىقلىماسلىق" />
                                 <%}
                                   else
                                   { %>
-                                <input type="button" class="btn btn-success btn-xs" name="name" value="تەستىقلاش" />
-                                <%} if (post.DelFlag)
+                                <input type="button" class="btn btn-success btn-xs" name="Approve" data-value="true" data-postid="<%:post.ID %>" value="تەستىقلاش" />
+                                <%} if (!post.DelFlag)
                                   { %>
-                                <input type="button" class="btn btn-danger btn-xs" name="name" value="ئەخلەتلەش" /><%}
+                                <input type="button" class="btn btn-danger btn-xs" name="DelFlag" data-value="true" data-postid="<%:post.ID %>" value="ئەخلەتلەش" /><%}
                       else
                       { %>
-                                <input type="button" class="btn btn-danger btn-xs" name="name" value="مەڭگۈلۈك ئۆچۈرۈش" />
-                                <input type="button" class="btn btn-info btn-xs" name="name" value="ئەسلىگە قايتۇرۇش" /><%} %>
+                                <input type="button" class="btn btn-danger btn-xs" name="Delete" data-postid="<%:post.ID %>" value="مەڭگۈلۈك ئۆچۈرۈش" />
+                                <input type="button" class="btn btn-info btn-xs" name="DelFlag" data-value="false" data-postid="<%:post.ID %>" value="ئەسلىگە قايتۇرۇش" /><%} %>
                             </div>
                         </div>
                     </td>
@@ -71,7 +75,7 @@
             </tbody>
         </table>
     </div>
-    <ul class="pagination pagination-sm">
+    <%--<ul class="pagination pagination-sm">
         <li class="disabled">
             <a href="#" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
@@ -87,6 +91,67 @@
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>
-    </ul>
+    </ul>--%>
+    <%:CreatePages() %>
+</asp:Content>
+<asp:Content ClientIDMode="AutoID" ID="Content3" ContentPlaceHolderID="BeforeBody" runat="server">
+
+    <script>
+        var msgs = {
+            'ok': 'ئۆزگەرتىشلەر ساقلاندى!'
+        };
+
+        //批准
+        $('.items-list input[name=Approve]').click(function () {
+            var pid = $(this).attr('data-postid');
+            var val = $(this).attr('data-value');
+            if (!pid || pid <= 0 || !val || (val != 'true' && val != 'false')) return;
+            var data = { 'Mode': 'approve', 'PostID': pid, 'Approved': val };
+            _submitPost(data);
+        });
+
+        //删除表示
+        $('.items-list input[name=DelFlag]').click(function () {
+            var pid = $(this).attr('data-postid');
+            var val = $(this).attr('data-value');
+            if (!pid || pid <= 0 || !val || (val != 'true' && val != 'false')) return;
+            var data = { 'Mode': 'delflag', 'PostID': pid, 'DelFlag': val };
+            _submitPost(data);
+        });
+
+        //彻底删除
+        $('.items-list input[name=Delete]').click(function () {
+            var _this = $(this);
+            Confirm('بۇ يازمىنى مەڭگۈلۈك ئۆچۈرەمسىز؟', 'ئۆچۈرۈش', function () {
+                //alert(132);
+                var pid = _this.attr('data-postid');
+                if (!pid || pid <= 0) return;
+                var data = { 'Mode': 'delete', 'PostID': pid };
+                _submitPost(data);
+            });
+        });
+
+
+        //提交
+        function _submitPost(data, okFn, errorFn) {
+            $.post('Editor.aspx', data, function (d) {
+                if (d['result'] == 'ok') {
+                    alertTip(msgs.ok, function () { window.location.reload() });
+                    if (typeof okFn == 'function') okFn(d);
+                } else {
+                    alertTip(msgs[d['error']], 'danger');
+                    if (typeof errorFn == 'function') errorFn(d.error);
+                }
+            }, 'json').error(function () { alertTip(msgs['server_error'], 'danger') });
+
+        }
+
+        //索索
+        $('#frm-search').submit(function () {
+            var inp = $(this).find('input[name=s]').val().trim();
+            if (!inp || inp.length <= 0) return false;
+
+        })
+    </script>
 </asp:Content>
 

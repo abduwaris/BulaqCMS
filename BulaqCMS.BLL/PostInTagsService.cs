@@ -43,6 +43,18 @@ namespace BulaqCMS.BLL
             return CurrentDAL.Delete(id, mode) > 0;
         }
 
+        /// <summary>
+        /// 根据关系删除
+        /// </summary>
+        /// <param name="postId">文章</param>
+        /// <param name="tagId">标签</param>
+        /// <returns></returns>
+        public bool Delete(int postId, int tagId)
+        {
+            return CurrentDAL.Delete(postId, tagId) > 0;
+        }
+
+
         public bool Delete(ModifiedMode mode, params int[] ids)
         {
             if (ids == null || ids.Length <= 0) return false;

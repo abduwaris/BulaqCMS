@@ -37,7 +37,7 @@
                         <input type="text" name="ValidateCode" value="" class="form-control" placeholder="تەستىق كود" />
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
-                        <img src="ImageCode.ashx" alt="Alternate Text" class="form-control" style="padding: 0; cursor: pointer" />
+                        <img src="/admin/ImageCode.ashx" alt="Alternate Text" class="form-control" style="padding: 0; cursor: pointer" />
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
     </div>
     <script type="text/javascript">
         $('#frm img').click(function () {
-            $(this).attr('src', 'imagecode.ashx?' + Math.random())
+            $(this).attr('src', '/admin/imagecode.ashx?' + Math.random())
         })
         $('#frm input[type=button]').click(function () {
             $.ajax({

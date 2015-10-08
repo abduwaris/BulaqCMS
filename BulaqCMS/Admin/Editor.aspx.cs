@@ -146,7 +146,7 @@ namespace BulaqCMS.Admin
                 /// aprove  批准
                 List<string> errors = new List<string>();
                 //bool isOk = false;
-                string[] modes = { "new", "edit", "rename", "savepractice", "send", "delflag", "delete", "cats", "newtag", "deltag", "pic", "aprove" };
+                string[] modes = { "new", "edit", "rename", "practice", "delflag", "categories", "visible", "newtag", "deletetag", "delete", "pic", "approve" };
                 if (modes.Contains(mode))
                 {
                     string title = stringNull(Frm["Title"]) ? null : Frm["Title"].Trim();
@@ -156,15 +156,29 @@ namespace BulaqCMS.Admin
                     bool _approvedSet = !stringNull(Frm["Approved"]) && bool.TryParse(Frm["Approved"].Trim(), out approved);
                     bool practice = true;
                     bool _practiceSet = !stringNull(Frm["Practice"]) && bool.TryParse(Frm["Practice"].Trim(), out practice);
+                    bool delflag = false;
+                    bool _delflagSet = !stringNull(Frm["DelFlag"]) && bool.TryParse(Frm["DelFlag"].Trim(), out delflag);
                     short visible = !stringNull(Frm["Visible"]) && short.TryParse(Frm["Visible"].Trim(), out visible) ? (visible < (short)1 || visible > (short)4 ? (short)1 : visible) : (short)1;
                     string[] categories = Frm.GetValues("Categories");
                     string[] tags = Frm.GetValues("Tags");
+                    int tagId = !stringNull(Frm["TagID"]) && int.TryParse(Frm["TagID"].Trim(), out tagId) ? tagId : 0;
+
                     if (tags != null && tags.Length > 0)
                     {
                         var tagList = tags.ToList();
-                        tagList.ForEach(p => p.Trim());
+                        tagList.ForEach(p =>
+                        {
+                            p = p.Replace("/", "").Replace("\\", "").Replace("&", "").Replace("?", "").Replace(":", "").Replace("#", "").Replace("=", "").Trim();
+                        });
                         tags = tagList.Distinct().ToArray();
                     }
+                    string newTag = stringNull(Frm["NewTag"]) ? null : Frm["NewTag"].Trim();
+                    if (newTag != null)
+                    {
+                        newTag = newTag.Replace("/", "").Replace("\\", "").Replace("&", "").Replace("?", "").Replace(":", "").Replace("#", "").Replace("=", "").Trim();
+                        if (stringNull(newTag)) newTag = null;
+                    }
+
                     string image = stringNull(Frm["Image"]) ? null : Frm["Image"].Trim();
                     int postId = 0;
                     bool _postId_set = !stringNull(Frm["PostID"]) && int.TryParse(Frm["PostID"].Trim(), out postId);
@@ -303,6 +317,194 @@ namespace BulaqCMS.Admin
 
                     #endregion
 
+                    #region Practice
+
+                    else if (mode == "practice")
+                    {
+                        if (postId > 0)
+                        {
+                            var post = Service.PostsService.GetPostById(postId);
+                            if (post != null)
+                            {
+                                if (_practiceSet)
+                                {
+                                    post.Practice = practice;
+                                    if (Service.PostsService.Update(post, PostModified.Practice)) isOk = true;
+                                    else error = "on_practice_error";
+                                }
+                                else error = "data_null";
+                            }
+                            else error = "post_null";
+                        }
+                        else error = "post_null";
+                    }
+
+                    #endregion
+
+                    #region DelFlag
+
+                    else if (mode == "delflag")
+                    {
+                        if (postId > 0)
+                        {
+                            var post = Service.PostsService.GetPostById(postId);
+                            if (post != null)
+                            {
+                                if (_delflagSet)
+                                {
+                                    post.DelFlag = delflag;
+                                    if (Service.PostsService.Update(post, PostModified.DelFlag))
+                                    {
+                                        isOk = true;
+                                    }
+                                    else error = "on_delflag_error";
+                                }
+                                else error = "data_null";
+                            }
+                            else error = "post_null";
+                        }
+                        else error = "post_null";
+                    }
+
+                    #endregion
+
+                    #region Categories
+
+                    else if (mode == "categories")
+                    {
+                        if (postId > 0)
+                        {
+                            var post = Service.PostsService.GetPostById(postId);
+                            if (post != null)
+                            {
+                                AddCategories(postId, categories);
+                                post.Categories = Service.CategoriesService.CategoriesByPost(postId);
+                                isOk = true;
+                                res = new { cats = post.Categories.Select(p => p.ID) };
+                            }
+                            else error = "post_null";
+                        }
+                        else error = "post_null";
+                    }
+
+                    #endregion
+
+                    #region Visible
+
+                    else if (mode == "visible")
+                    {
+                        if (postId > 0)
+                        {
+                            var post = Service.PostsService.GetPostById(postId);
+                            if (post != null)
+                            {
+                                post.VisibleState = visible;
+                                if (Service.PostsService.Update(post, PostModified.Visible))
+                                {
+                                    isOk = true;
+                                }
+                                else error = "on_visible_error";
+                            }
+                            else error = "post_null";
+                        }
+                        else error = "post_null";
+                    }
+
+                    #endregion
+
+                    #region NewTag
+
+                    else if (mode == "newtag")
+                    {
+                        if (postId > 0)
+                        {
+                            var post = Service.PostsService.GetPostById(postId);
+                            if (post != null)
+                            {
+                                //AddTags(postId, new string[] { newTag });
+                                //post.Tags = Service.TagsService.GetTagsByPostId(postId);
+                                int tagIdd = AddNewTag(postId, newTag);
+                                isOk = true;
+                                res = new { tag_id = tagIdd };
+                            }
+                            else error = "post_null";
+                        }
+                        else error = "post_null";
+                    }
+
+                    #endregion
+
+                    #region 删除标签
+
+                    else if (mode == "deletetag")
+                    {
+                        if (postId > 0)
+                        {
+                            var post = Service.PostsService.GetPostById(postId);
+                            if (post != null)
+                            {
+                                if (tagId > 0)
+                                {
+                                    Service.PostInTagsService.Delete(postId, tagId);
+                                    isOk = true;
+                                }
+                                else error = "data_null";
+                            }
+                            else error = "post_null";
+                        }
+                        else error = "post_null";
+                    }
+                    #endregion
+
+                    #region 删除文章
+
+                    else if (mode == "delete")
+                    {
+                        if (postId > 0)
+                        {
+                            var post = Service.PostsService.GetPostById(postId);
+                            if (post != null)
+                            {
+                                if (Service.PostsService.Delete(postId))
+                                {
+                                    isOk = true;
+                                }
+                                else error = "on_delete_error";
+                            }
+                            else error = "post_null";
+                        }
+                        else error = "post_null";
+                    }
+
+                    #endregion
+
+                    #region 批准文章
+
+                    else if (mode == "approve")
+                    {
+                        if (postId > 0)
+                        {
+                            var post = Service.PostsService.GetPostById(postId);
+                            if (post != null)
+                            {
+                                if (_approvedSet)
+                                {
+                                    post.Approved = approved;
+                                    if (Service.PostsService.Update(post, PostModified.Approve))
+                                    {
+                                        isOk = true;
+                                    }
+                                    else error = "on_approve_error";
+                                }
+                                else error = "data_null";
+                            }
+                            else error = "post_null";
+                        }
+                        else error = "post_null";
+                    }
+
+                    #endregion
+
                     //context.Response.Write(JsonConvert.SerializeObject(new { result = isOk ? "ok" : "no", errors = errors, res = retains }));
                     //return;
                     Result.Set(isOk, error, res);
@@ -310,6 +512,7 @@ namespace BulaqCMS.Admin
             }
             base.OnInit(e);
         }
+
 
         /// <summary>
         /// 修改标签关系
@@ -351,6 +554,31 @@ namespace BulaqCMS.Admin
                     Service.PostInTagsService.Delete(ModifiedMode.Self, deleteTags.Select(p => p.ID).ToArray());
                 }
             }
+
+        }
+
+
+        int AddNewTag(int postId, string tag)
+        {
+            var tags = Service.TagsService.GetTagsByPostId(postId);
+            var ntag = tags.FirstOrDefault(p => p.Title == tag);
+            if (ntag != null)
+            {
+                return ntag.ID;
+            }
+            var hasTag = Service.TagsService.GetTagsByTitles(tag);
+            if (hasTag.Count() > 0)
+            {
+                //添加关系
+                Service.PostInTagsService.Add(postId, (new TagsModel[] { hasTag.First() }).ToList());
+                return hasTag.First().ID;
+            }
+            //添加标签
+            Service.TagsService.QuickAdd(new TagsModel() { Title = tag });
+            //获取关系
+            hasTag = Service.TagsService.GetTagsByTitles(tag);
+            Service.PostInTagsService.Add(postId, (new TagsModel[] { hasTag.First() }).ToList());
+            return hasTag.First().ID;
 
         }
 

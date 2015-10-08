@@ -16,7 +16,7 @@ namespace BulaqCMS.Models
         /// <summary>
         /// 发表
         /// </summary>
-        Send,
+        Visible,
         /// <summary>
         /// 设置头贴
         /// </summary>

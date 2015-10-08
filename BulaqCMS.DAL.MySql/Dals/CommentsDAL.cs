@@ -69,7 +69,7 @@ namespace BulaqCMS.DAL.MySql
         {
             string sql = string.Format("Select `{0}comments`.`com_id`,`{0}comments`.`post_id` from `{0}comments` where `{0}comments`.`post_id` IN ({1});", Helper.Prefix, string.Join(",", postIds));
             DataTable dt = Helper.Select(sql);
-            if (dt.Rows.Count <= 0) return null;
+            if (dt.Rows.Count <= 0) return new List<CommentsModel>();
             return dt.Rows.Cast<DataRow>().Select(r => new CommentsModel() { ID = Convert.ToInt32(r["com_id"]), PostID = Convert.ToInt32(r["post_id"]) }).ToList();
         }
 

@@ -127,6 +127,18 @@ namespace BulaqCMS.DAL.MySql
             return Helper.Query(sql);
         }
 
+        /// <summary>
+        /// 根据关系删除
+        /// </summary>
+        /// <param name="postId">文章</param>
+        /// <param name="tagId">标签</param>
+        /// <returns></returns>
+        public int Delete(int postId, int tagId)
+        {
+            string sql = string.Format("delete from `{0}post_in_tags` where `{0}post_in_tags`.`post_id`={1} and `{0}post_in_tags`.`tag_id`={2};", Helper.Prefix, postId, tagId);
+            return Helper.Query(sql);
+        }
+
         protected override PostInTagsModel ToModel(DataRow row)
         {
             PostInTagsModel tag = new PostInTagsModel();

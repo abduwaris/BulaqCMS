@@ -1,8 +1,11 @@
 ﻿using BulaqCMS.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Text;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -63,7 +66,7 @@ namespace BulaqCMS.Admin
         {
             QueryString = new Dictionary<string, object>();
             //获取浏览对象
-            string[] views = { "all", "aprove", "delflag" };
+            string[] views = { "all", "aprove", "delflag", "search" };
             view = string.IsNullOrEmpty(Request.QueryString["view"]) ? "all" : Request.QueryString["view"].Trim().ToLower();
             if (!views.Contains(view)) view = "all";
             bool? isAprove = view == "aprove" ? (bool?)false : null;
@@ -126,6 +129,108 @@ namespace BulaqCMS.Admin
             {
                 return "post-posts";
             }
+        }
+
+
+        public HtmlString CreatePages()
+        {
+            StringBuilder sb = new StringBuilder();
+            if (pageCount <= 1) return null;
+            sb.Append("<ul class=\"pagination pagination-sm\">");
+            //上一页按钮
+            sb.Append("<li");
+            if (pageIndex == 1)
+            {
+                sb.Append(" class=\"disabled\">");
+                sb.Append("<a aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a>");
+                sb.Append("</li>");
+            }
+            else
+            {
+                sb.Append("><a href=\"?");
+                sb.Append(CreateQueryString("page", pageIndex - 1));
+                sb.Append("\" aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>");
+            }
+
+            //页
+            if (pageCount <= 8)
+            {
+                for (int i = 1; i <= pageCount; i++)
+                {
+                    //<li class=""><a href="#">1</a></li>
+                    sb.Append("<li");
+                    if (pageIndex == i)
+                        sb.Append(" class=\"active disabled\"");
+                    sb.Append("><a");
+                    if (pageIndex != i)
+                        sb.Append(string.Format(" href=\"?{0}\"", CreateQueryString("page", i)));
+                    sb.Append(string.Format(">{0}</a></li>", i));
+                }
+            }
+            else
+            {
+                if (pageIndex <= 4)
+                {
+                    for (int i = 1; i <= 7; i++)
+                    {
+                        sb.Append("<li");
+                        if (pageIndex == i)
+                            sb.Append(" class=\"active disabled\"");
+                        sb.Append("><a");
+                        if (pageIndex != i)
+                            sb.Append(string.Format(" href=\"?{0}\"", CreateQueryString("page", i)));
+                        sb.Append(string.Format(">{0}</a></li>", i));
+                    }
+                    sb.Append("<li><a>...</a></li>");
+                }
+                else if (pageIndex <= pageCount - 4)
+                {
+                    sb.Append("<li><a>...</a></li>");
+                    for (int i = pageCount - 7; i <= pageCount; i++)
+                    {
+                        sb.Append("<li");
+                        if (pageIndex == i)
+                            sb.Append(" class=\"active disabled\"");
+                        sb.Append("><a");
+                        if (pageIndex != i)
+                            sb.Append(string.Format(" href=\"?{0}\"", CreateQueryString("page", i)));
+                        sb.Append(string.Format(">{0}</a></li>", i));
+                    }
+                }
+                else
+                {
+                    sb.Append("<li><a>...</a></li>");
+                    for (int i = pageIndex - 3; i <= pageIndex + 3; i++)
+                    {
+                        sb.Append("<li");
+                        if (pageIndex == i)
+                            sb.Append(" class=\"active disabled\"");
+                        sb.Append("><a");
+                        if (pageIndex != i)
+                            sb.Append(string.Format(" href=\"?{0}\"", CreateQueryString("page", i)));
+                        sb.Append(string.Format(">{0}</a></li>", i));
+                    }
+                    sb.Append("<li><a>...</a></li>");
+                }
+            }
+
+            //下一页
+            sb.Append("<li");
+            if (pageIndex == pageCount)
+            {
+                sb.Append(" class=\"disabled\">");
+                sb.Append("<a aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a>");
+                sb.Append("</li>");
+            }
+            else
+            {
+                sb.Append("><a href=\"?");
+                sb.Append(CreateQueryString("page", pageIndex + 1));
+                sb.Append("\" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a></li>");
+            }
+
+            sb.Append("</ul>");
+            return new HtmlString(sb.ToString());
         }
     }
 }

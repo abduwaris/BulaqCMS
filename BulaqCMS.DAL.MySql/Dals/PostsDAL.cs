@@ -404,7 +404,7 @@ namespace BulaqCMS.DAL.MySql
                 sets.Add("`{0}posts`.`post_name`= @pname");
                 param.Add(new MySqlParameter("@pname", post.Name));
             }
-            if (modi == PostModified.Send)
+            if (modi == PostModified.Visible)
             {
                 sets.Add("`{0}posts`.`visible_state`= @visiblestate");
                 param.Add(new MySqlParameter("@visiblestate", post.VisibleState));

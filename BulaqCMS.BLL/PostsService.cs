@@ -82,13 +82,37 @@ namespace BulaqCMS.BLL
             totalCount = CurrentDAL.Count(categoryId, tagId, authorId, isApproved, isDelFlag, isPractice);
             var posts = CurrentDAL.GetPostsByPage(pageSize, pageIndex, PostsOrderByMode.ID_Desc, categoryId, tagId, authorId, isApproved, isDelFlag);
             if (includeCommentsCount || includeAuthor || includeCategories || includeTags)
+            {
+                //获取所有文章的个数关联
+                List<CommentsModel> coms = null;
+                if (includeCommentsCount) coms = DAL.CommentsDAL.CommentsInPost(posts.Select(p => p.ID).ToArray());
+                List<UsersModel> author = null;
+                if (includeAuthor) author = DAL.UserDAL.GetList();
+                List<CategoriesModel> cats = null;
+                List<PostInCategoriesModel> catIn = null;
+                if (includeCategories)
+                {
+                    cats = DAL.CategoriesDAL.GetList();
+                    catIn = DAL.PostInCategoriesDAL.GetList();
+                }
+
+                List<TagsModel> tags = null;
+                List<PostInTagsModel> tagIn = null;
+                if (includeTags)
+                {
+                    tagIn = DAL.PostInTagsDAL.GetList(ModifiedMode.Post, posts.Select(p => p.ID).ToArray());
+                    tags = DAL.TagsDAL.GetList(tagIn.Select(p => p.TagID).ToArray());
+                }
+
                 foreach (var post in posts)
                 {
-                    if (includeCommentsCount) post.CommentsCount = DAL.CommentsDAL.CommentsInPost(post.ID).Count;
-                    if (includeAuthor) post.Author = DAL.UserDAL.GetUserById(post.AuthorID);
-                    if (includeCategories) post.Categories = DAL.CategoriesDAL.GetList(post.ID);
-                    if (includeTags) post.Tags = DAL.TagsDAL.GetListByPost(post.ID);
+                    if (includeCommentsCount) post.CommentsCount = coms.Count(p => p.PostID == post.ID);
+                    if (includeAuthor) post.Author = author.FirstOrDefault(p => p.ID == post.AuthorID);
+                    if (includeCategories) post.Categories = cats.Where(p => catIn.Where(c => c.PostID == post.ID).Select(c => c.CategoryID).Contains(p.ID)).ToList();
+
+                    if (includeTags) post.Tags = tags.Where(p => tagIn.Where(c => c.PostID == post.ID).Select(c => c.TagID).Contains(p.ID)).ToList();
                 }
+            }
             return posts;
         }
 

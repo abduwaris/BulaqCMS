@@ -116,7 +116,7 @@ namespace BulaqCMS.DAL.MySql
                 param.Add(new MySqlParameter(pdes, tags[i].Des));
             }
             string sql = string.Format("insert into `{0}tags`(`{0}tags`.`title`,`{0}tags`.`name`,`{0}tags`.`des`) VALUES{1};", Helper.Prefix, string.Join(",", values));
-            return Helper.Query(sql);
+            return Helper.Query(sql,param.ToArray());
         }
 
         /// <summary>

@@ -58,27 +58,31 @@
             </form>
         </div>
         <div class="col-sm-3">
-            <div class="panel panel-default" data-slidable>
-                <div class="panel-heading">ئىلان قىلىش</div>
-                <div class="panel-body">
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="open" value="4" />
-                            ئارگىنال ساقلاش
-                        </label>
+            <form id="practice_set">
+                <div class="panel panel-default" data-slidable>
+                    <div class="panel-heading">ئىلان قىلىش</div>
+                    <div class="panel-body">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="Practice" value="true" <%:Html((isEdit&&UpdatePosts.Practice)||!isEdit?"checked=\"checked\"":"") %> />
+                                ئارگىنال ساقلاش
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="Practice" value="false" <%:Html(isEdit&&!UpdatePosts.Practice?"checked=\"checked\"":"") %> />
+                                ئىلان قىلىش
+                            </label>
+                        </div>
                     </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="open" value="4" />
-                            ئىلان قىلىش
-                        </label>
+                    <div class="panel-footer clearfix">
+                        <input type="hidden" name="Mode" value="practice" />
+                        <input type="button" name="submit" value="ئۆزگەرتىشلەرنى ساقلاش" class="btn btn-primary btn-sm f-right" />
+                        <input type="button" name="delflag" data-value="true" value="ئەخلەت ساندۇقىغا يۆتكەش" class="btn btn-danger btn-sm f-left" />
                     </div>
                 </div>
-                <div class="panel-footer clearfix">
-                    <input type="button" name="name" value="ئۆزگەرتىشلەرنى ساقلاش" class="btn btn-primary btn-sm f-right" />
-                    <input type="button" name="name" value="ئەخلەت ساندۇقىغا يۆتكەش" class="btn btn-danger btn-sm f-left" />
-                </div>
-            </div>
+            </form>
+
             <form id="visible_set">
                 <div class="panel panel-default" data-slidable>
                     <div class="panel-heading">ئوقۇش</div>
@@ -109,7 +113,7 @@
                         </div>
                     </div>
                     <div class="panel-footer clearfix">
-                        <input type="button" name="name" value="ساقلاش" class="btn btn-primary btn-sm f-right" />
+                        <input type="button" name="submit" value="ساقلاش" class="btn btn-primary btn-sm f-right" />
                     </div>
                 </div>
             </form>
@@ -129,7 +133,7 @@
                         <%} %>
                     </div>
                     <div class="panel-footer">
-                        <input type="button" name="name" value="ساقلاش" class="btn btn-primary btn-sm" />
+                        <input type="button" name="submit" value="ساقلاش" class="btn btn-primary btn-sm" />
                     </div>
                 </div>
             </form>
@@ -137,33 +141,22 @@
                 <div class="panel-heading">خەتكۈچلەر</div>
                 <div class="panel-body">
                     <div class="form-inline">
-                        <div class="form-group">
-                            <input type="email" class="form-control input-sm" placeholder="خەتكۈچلەر">
-                        </div>
-                        <div class="form-group">
-                            <input type="button" name="name" value="قوشۇش" class="btn btn-default btn-sm" />
-                        </div>
-                        <div>
-                            <i>كۆپ خەتكۈچلەرنى پەش بىلەن ئايرىپ يېزىڭ</i>
-                        </div>
-                        <div class="post-tags">
+                        <div class="post-tags" id="post_tags">
+                            <%if (isEdit)
+                              {
+                                  foreach (var tag in postTags)
+                                  {%>
                             <div class="form-group">
-                                <input type="hidden" name="name" value="tags-0" />
-                                <i class="form-control input-sm">پىروگىراممىلار<span class="glyphicon glyphicon-remove remove-tag-icon"></span></i>
+                                <input type="hidden" name="Tag" value="<%:tag.ID %>" />
+                                <i onclick="deleteTag(<%:string.Format("{0},{1}",UpdatePosts.ID,tag.ID) %>)" class="form-control input-sm"><%:tag.Title %><span class="glyphicon glyphicon-remove remove-tag-icon"></span></i>
                             </div>
-                            <div class="form-group">
-                                <input type="hidden" name="name" value="tags-0" />
-                                <i class="form-control input-sm">پىروگىراممىلار<span class="glyphicon glyphicon-remove remove-tag-icon"></span></i>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" name="name" value="tags-0" />
-                                <i class="form-control input-sm">پىروگىراممىلار<span class="glyphicon glyphicon-remove remove-tag-icon"></span></i>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" name="name" value="tags-0" />
-                                <i class="form-control input-sm">پىروگىراممىلار<span class="glyphicon glyphicon-remove remove-tag-icon"></span></i>
+                            <% }
+                              } %>
+                            <div class="form-group" id="new_tag_box">
+                                <input type="text" id="new_tag_inp" class="form-control input-sm" placeholder="يېڭى خەتكۈچ" style="width: 120px;">
                             </div>
                         </div>
+
                     </div>
                     <a href="#" class="btn btn-link">ئاۋات خەتكۈچلەرنى تاللاش</a>
                 </div>
@@ -227,12 +220,12 @@
             'name_format': 'يازما باشقا نامىدا خاتالىق بار! قايتا نام بىرىڭ!',
             'name_null': 'يازما باشقا نامى بوش قالمىسۇن!',
             'ok': 'ئۆزگەرتىشلەر ساقلاندى!',
-            '': '',
-            '': '',
-            '': '',
-            '': '',
-            '': '',
-            '': '',
+            'on_delflag_error': 'يازمىنى ئۆچۈرۈشتە خاتالىق كۆرۈلدى!',
+            'data_null': 'ئۇچۇرلاردا خاتالىق بار!',
+            'on_practice_error': 'ئارگىنال ساقلاشتا خاتالىق كۆرۈلدى!',
+            'on_visible_error': 'يازما ھقۇقۇقى تەڭشەشتە خاتالىق بار!',
+            'on_delete_error': 'يازمىنى ئۆچۈرۈشتە خاتالىق كۆرۈلدى!',
+            'on_approve_error': 'يازمىنى تەستىقلاشتا خاتالىق كۆرۈلدى!',
             '': '',
             '': '',
             '': '',
@@ -259,6 +252,9 @@
             $.post('Editor.aspx', frm.serialize(), function (d) {
                 if (d['result'] == 'ok') {
                     //设置文章
+                    if (!isNew) {
+                        alertTip(msgs.ok);
+                    }
                     frm.find('input[name=PostID]').val(d.res.post_id);
                     if (isNew) {
                         frm.find('input[data-name=Name]').attr("name", 'Name');
@@ -292,15 +288,135 @@
         });
 
         //提交
-        function _submitPost(data) {
+        function _submitPost(data, okFn, errorFn) {
             $.post('Editor.aspx', data, function (d) {
                 if (d['result'] == 'ok') {
                     alertTip(msgs.ok);
+                    if (typeof okFn == 'function') okFn(d);
                 } else {
-                    alert(msgs[d['error']], 'danger');
+                    alertTip(msgs[d['error']], 'danger');
+                    if (typeof errorFn == 'function') errorFn(d.error);
                 }
             }, 'json').error(function () { alertTip(msgs['server_error'], 'danger') });
 
+        }
+
+        //修改practice
+        $('#practice_set input[name=submit]').click(function () {
+            //alert($('#practice_set').serialize());
+            var frm = $('#frm-editor');
+            var pid = frm.find('input[name=PostID]').val();
+            if (!pid || pid <= 0) return;
+            var data = $('#practice_set').serialize();
+            data += '&PostID=' + pid;
+            _submitPost(data);
+        });
+
+        //删除
+        $('#practice_set input[name=delflag]').click(function () {
+            var _this = $(this);
+            var val = $(this).attr('data-value');
+            if (!val || (val != 'true' && val != 'false')) return;
+            var frm = $('#frm-editor');
+            var pid = frm.find('input[name=PostID]').val();
+            if (!pid || pid <= 0) return;
+            var data = 'Mode=delflag';
+            data += '&PostID=' + pid;
+            data += '&DelFlag=' + val;
+            _submitPost(data, function (d) {
+                _this.removeClass(val == 'true' ? 'btn-danger' : 'btn-info').addClass(val == 'true' ? 'btn-info' : 'btn-danger').attr('data-value', val == 'true' ? 'false' : 'true').val(val == 'true' ? 'ئەخلەت ساندۇقىدىن چىقىرىش' : 'ئەخلەت ساندۇقىغا يۆتكەش');
+            });
+        });
+
+        //显示
+        $('#visible_set input[name=submit]').click(function () {
+            var frm = $('#frm-editor');
+            var pid = frm.find('input[name=PostID]').val();
+            if (!pid || pid <= 0) return;
+            var _thisFrm = $('#visible_set');
+            var data = _thisFrm.serialize();
+            data += '&Mode=visible';
+            data += '&PostID=' + pid;
+            _submitPost(data);
+        });
+
+        //文章分类
+        $('#categorieas_set input[name=submit]').click(function () {
+            var frm = $('#frm-editor');
+            var pid = frm.find('input[name=PostID]').val();
+            if (!pid || pid <= 0) return;
+            var _thisFrm = $('#categorieas_set');
+            var data = _thisFrm.serialize();
+            data += '&Mode=categories';
+            data += '&PostID=' + pid;
+            _submitPost(data, function (d) {
+                modeCategories(d.res.cats);
+            })
+        });
+
+        //标签
+        $('#new_tag_inp').keypress(function (e) {
+            var c = e['charCode'];
+            if (c == 61 || c == 92 || c == 47 || c == 58 || c == 38 || c == 35 || c == 63) return;
+
+
+
+            if (c == 13 /*|| e['charCode'] == 115*/) {
+                //调教标签
+                //  = 61
+                //  \  92
+                // /  47
+                // :   58
+                //  &  38
+                //  #  35
+                //   ?  63
+                var val = $(this).val().replace(/[\?#&:/\\=]/, '').trim();
+                if (!val || val.length <= 0) return;
+                var frm = $('#frm-editor');
+                var pid = frm.find('input[name=PostID]').val();
+                //newTag($(this).val());
+                $(this).val('');
+                if (!pid || pid <= 0) return;
+                var data = { 'Mode': 'newtag', 'NewTag': val, 'PostID': pid };
+                _submitPost(data, function (d) {
+                    // modeTags(d.res.tags);
+                    var tag_id = d.res.tag_id;
+                    //添加到集合中
+                    if ($('#post_hiddens input[name=Tags]').filter('[value="' + tag_id + '"]').length <= 0) {
+                        $('#post_hiddens').append('<input name="Tags" type="hidden" value="' + tag_id + '">');
+                    }
+                    //添加到
+                    //<div class="form-group">
+                    //            <input type="hidden" name="name" value="tags-0" />
+                    //            <i class="form-control input-sm">پىروگىراممىلار<span class="glyphicon glyphicon-remove remove-tag-icon"></span></i>
+                    //       </div>
+                    if ($('#post_tags input[name=Tag]').filter('[value="' + tag_id + '"]').length <= 0) {
+                        var htm = '<div class="form-group"><input type="hidden" name="Tag" value="'
+                            + tag_id
+                            + '" /><i class="form-control input-sm">'
+                        + val
+                        + '<span class="glyphicon glyphicon-remove remove-tag-icon"></span></i></div>';
+                        var htm = $(htm);
+                        htm.find('i').click(function () {
+                            deleteTag(pid, tag_id);
+                        })
+                        $('#new_tag_box').before(htm);
+                    }
+                }, function (error) {
+
+                });
+                return false;
+            }
+        })
+
+        //删除标签
+        function deleteTag(postId, tagId) {
+            if (!postId || postId <= 0 || !tagId || tagId <= 0) return;
+            var data = { 'Mode': 'deletetag', 'TagID': tagId, 'postId': postId };
+            _submitPost(data, function (d) {
+                $('#frm-editor input[name=Tags]').filter('[value=' + tagId + ']').remove();
+                $('#post_tags input[name=Tag]').filter('[value=' + tagId + ']').parents('.form-group').remove();
+            });
         }
 
         //处理文章分类
@@ -319,9 +435,17 @@
         //处理标签类
         function modeTags(tags) {
             var hid = $('#post_hiddens');
+            //删除
+            hid.find('input[name=Tags]').remove();
+            //添加
             for (var i = 0; i < tags.length; i++) {
                 hid.append('<input type="hidden" name="Tags" value="' + tags[i] + '" />');
             }
+        }
+
+        //新的标签
+        function newTag(tagStr) {
+
         }
 
         //点击分类选择框

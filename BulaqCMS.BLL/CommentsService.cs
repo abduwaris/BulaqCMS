@@ -131,6 +131,10 @@ namespace BulaqCMS.BLL
         public int Delete(int postId)
         {
             var coms = CommentsInPosts(postId);
+            if (coms==null||coms.Count<=0)
+            {
+                return 0;
+            }
             //删除评论参数
             Service.CommentOptionsService.Delete(true, coms.Select(p => p.ID).ToArray());
             //删除评论

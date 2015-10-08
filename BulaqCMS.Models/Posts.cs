@@ -112,7 +112,6 @@ namespace BulaqCMS.Models
         /// </summary>
         public bool DelFlag { get; set; }
 
-
         /// <summary>
         /// 是否批准
         /// </summary>

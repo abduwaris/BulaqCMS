@@ -20,3 +20,7 @@ D:\vsproject\New\BlogUI\BulaqCMS\bin\BulaqCMS.DALService.pdb
 D:\vsproject\New\BlogUI\BulaqCMS\obj\Debug\BulaqCMS.csprojResolveAssemblyReference.cache
 D:\vsproject\New\BlogUI\BulaqCMS\obj\Debug\BulaqCMS.dll
 D:\vsproject\New\BlogUI\BulaqCMS\obj\Debug\BulaqCMS.pdb
+D:\vsproject\New\BlogUI\BulaqCMS\bin\BulaqCMS.AspxTemplate.dll
+D:\vsproject\New\BlogUI\BulaqCMS\bin\BulaqCMS.AspxTemplate.pdb
+D:\vsproject\New\BlogUI\BulaqCMS\bin\BulaqCMS.TemplateModels.dll
+D:\vsproject\New\BlogUI\BulaqCMS\bin\BulaqCMS.TemplateModels.pdb

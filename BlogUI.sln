@@ -23,6 +23,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulaqCMS.Installer.Mysql", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulaqCMS.Common", "BulaqCMS.Common\BulaqCMS.Common.csproj", "{DB597B52-A8EB-4ED3-93B1-14FD30B77EA0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelTest", "ModelTest\ModelTest.csproj", "{7FA8B9B4-CC72-482C-AEC7-1D0DD15D36E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulaqCMS.RazorTemplate", "BulaqCMS.RazorTemplate\BulaqCMS.RazorTemplate.csproj", "{68956C21-3B86-4F0A-A23A-1B6FC3542CA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulaqCMS.AspxTemplate", "BulaqCMS.AspxTemplateEngine\BulaqCMS.AspxTemplate.csproj", "{EC5BF0D8-334F-4596-9BB8-0DA7A6817260}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulaqCMS.Exceptions", "BulaqCMS.Exceptions\BulaqCMS.Exceptions.csproj", "{652AE82A-B885-4149-9C72-06C2648A5026}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulaqCMS.TemplateModels", "BulaqCMS.TemplateModels\BulaqCMS.TemplateModels.csproj", "{6B0D990A-DC85-4FE4-A56B-0905BA08E7EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +79,26 @@ Global
 		{DB597B52-A8EB-4ED3-93B1-14FD30B77EA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB597B52-A8EB-4ED3-93B1-14FD30B77EA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB597B52-A8EB-4ED3-93B1-14FD30B77EA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FA8B9B4-CC72-482C-AEC7-1D0DD15D36E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FA8B9B4-CC72-482C-AEC7-1D0DD15D36E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FA8B9B4-CC72-482C-AEC7-1D0DD15D36E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FA8B9B4-CC72-482C-AEC7-1D0DD15D36E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68956C21-3B86-4F0A-A23A-1B6FC3542CA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68956C21-3B86-4F0A-A23A-1B6FC3542CA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68956C21-3B86-4F0A-A23A-1B6FC3542CA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68956C21-3B86-4F0A-A23A-1B6FC3542CA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC5BF0D8-334F-4596-9BB8-0DA7A6817260}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC5BF0D8-334F-4596-9BB8-0DA7A6817260}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC5BF0D8-334F-4596-9BB8-0DA7A6817260}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC5BF0D8-334F-4596-9BB8-0DA7A6817260}.Release|Any CPU.Build.0 = Release|Any CPU
+		{652AE82A-B885-4149-9C72-06C2648A5026}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{652AE82A-B885-4149-9C72-06C2648A5026}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{652AE82A-B885-4149-9C72-06C2648A5026}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{652AE82A-B885-4149-9C72-06C2648A5026}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B0D990A-DC85-4FE4-A56B-0905BA08E7EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B0D990A-DC85-4FE4-A56B-0905BA08E7EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B0D990A-DC85-4FE4-A56B-0905BA08E7EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B0D990A-DC85-4FE4-A56B-0905BA08E7EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

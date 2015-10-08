@@ -29,6 +29,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -177,6 +178,7 @@
     <Content Include="App_Data\AppSettings.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Index.ashx" />
     <None Include="Properties\PublishProfiles\BulaqCMS.pubxml" />
     <Content Include="Scripts\bootstrap-rtl.min.js.map">
       <DependentUpon>bootstrap-rtl.min.js</DependentUpon>
@@ -188,6 +190,12 @@
     <Content Include="Scripts\jquery.uploadify.min.js" />
     <Content Include="Scripts\jquery.uploadify.my.js" />
     <Content Include="Scripts\jquery.uploadify.source.js" />
+    <Content Include="Template\default\css\classic.css" />
+    <Content Include="Template\default\css\crayon.min.css" />
+    <Content Include="Template\default\css\monaco.css" />
+    <Content Include="Template\default\css\style.css" />
+    <Content Include="Template\default\css\vs2012-black.css" />
+    <Content Include="Template\default\index.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -332,13 +340,30 @@
     <Compile Include="Admin\_Admin.Master.designer.cs">
       <DependentUpon>_Admin.Master</DependentUpon>
     </Compile>
+    <Compile Include="App_Start\AdminRouteHandler.cs" />
+    <Compile Include="App_Start\BulaqHttpModule.cs" />
+    <Compile Include="App_Start\BulaqRoute.cs" />
+    <Compile Include="App_Start\BulaqRouteHandler.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BulaqRouteModule.cs" />
     <Compile Include="Bundle\BundleBase.cs" />
     <Compile Include="Bundle\CssBundle.cs" />
     <Compile Include="Bundle\ScriptBundle.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Index.ashx.cs">
+      <DependentUpon>Index.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Template\CategoryHandler.cs" />
+    <Compile Include="Template\Erro404Handler.cs" />
+    <Compile Include="Template\IndexHandler.cs" />
+    <Compile Include="Template\PostHandler.cs" />
+    <Compile Include="Template\SearchHandler.cs" />
+    <Compile Include="Template\TagHandler.cs" />
+    <Compile Include="Template\TemplateBaseHandler.cs" />
+    <Compile Include="Template\TemplateNotExeciteHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-2.1.4.min.map" />
@@ -346,6 +371,7 @@
     <Content Include="Scripts\jquery-2.1.4.min.js.map">
       <DependentUpon>jquery-2.1.4.min.js</DependentUpon>
     </Content>
+    <None Include="Template\default\index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -354,6 +380,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BulaqCMS.AspxTemplateEngine\BulaqCMS.AspxTemplate.csproj">
+      <Project>{ec5bf0d8-334f-4596-9bb8-0da7a6817260}</Project>
+      <Name>BulaqCMS.AspxTemplate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BulaqCMS.BLL\BulaqCMS.BLL.csproj">
       <Project>{c3c23adb-6665-47b9-8c01-44acb489dab2}</Project>
       <Name>BulaqCMS.BLL</Name>
@@ -372,8 +402,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BulaqCMSControl\" />
     <Folder Include="Images\PostsUpload\" />
+    <Folder Include="Template\default\fonts\" />
+    <Folder Include="Template\default\imgs\" />
+    <Folder Include="Template\default\js\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

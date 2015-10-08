@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
 
@@ -14,36 +15,15 @@ namespace BulaqCMS
         protected void Application_Start(object sender, EventArgs e)
         {
             //判断程序是否安装
+            //注册路由
+            RouteConfig.RegisterRoute(RouteTable.Routes);
+
+            //this.PostResolveRequestCache += Global_PostResolveRequestCache;
         }
 
-        protected void Session_Start(object sender, EventArgs e)
+        void Global_PostResolveRequestCache(object sender, EventArgs e)
         {
-            
-        }
-
-        protected void Application_BeginRequest(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Application_AuthenticateRequest(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Application_Error(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Session_End(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Application_End(object sender, EventArgs e)
-        {
-
+            //var url = ((HttpApplication)sender).Context.Request.RawUrl;
         }
     }
 }
